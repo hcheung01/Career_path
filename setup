@@ -1,0 +1,4 @@
+#!/usr/local/bin/env bash
+pip3 install --upgrade google-cloud-storage
+pip install --upgrade google-cloud-storage
+export GOOGLE_APPLICATION_CREDENTIALS="JobMe-01ddc2863595.json"
