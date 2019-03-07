@@ -1,1 +1,6 @@
 *.json
+*.pyc
+__pycache__/*
+set_credent
+virtualenv_setup
+env/
