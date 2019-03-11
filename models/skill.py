@@ -12,5 +12,5 @@ class Skill(BaseModel, Base):
     __tablename__ = 'skills'
     name = Column(String(128), nullable=False)
     profile_skills = relationship('ProfileSkill',
-                                   backref='amenities',
+                                   backref='skills',
                                    cascade='delete')
