@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Flask App that integrates with AirBnB static HTML Template
+Flask App that integrates with CareerUp static HTML Template
 """
 from flask import render_template, url_for, flash, redirect, request, Flask, jsonify
 from models import storage
@@ -33,13 +33,20 @@ def teardown_db(exception):
 @app.route('/home')
 def home():
     """
-    handles request to custom template with states, cities & amentities
+    handles request to custom template
     """
     if current_user.is_authenticated:
-        flash('you are loged in')
     return render_template('home.html',
                            title='home')
 
+@app.route('/about')
+def about():
+    """
+    handles request to custom template
+    """
+    if current_user.is_authenticated:
+    return render_template('about.html',
+                           title='about')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
