@@ -1,0 +1,195 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <!-- Menu -->
+      <section id="menu">
+
+        <!-- Search -->
+          <section>
+            <form class="search" method="get" action="#">
+              <input type="text" name="query" placeholder="Search" />
+            </form>
+          </section>
+
+        <!-- Links -->
+          <section>
+            <ul class="links">
+              <li>
+                <a href="#">
+                  <h3>About</h3>
+                  <p>How we started</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h3>Mission</h3>
+                  <p>Why did we do this?</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h3>Who we are</h3>
+                  <p>Our team and collaborators</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h3>Contact</h3>
+                  <p>Please send feedbacks</p>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+        <!-- Actions -->
+          <section>
+            <ul class="actions stacked">
+              <li><a href="#" class="button large fit">Log In</a></li>
+            </ul>
+          </section>
+
+      </section>
+
+    <!-- Main -->
+      <div id="main">
+
+        <!-- Post -->
+          <article class="post">
+            <header>
+              <div class="title">
+                <h2><a href="single.html">Search Jobs</a></h2>
+                <p>Try Searching below</p>
+              </div>
+            </header>
+
+
+            <section>
+            <h3>preferences</h3>
+            <form method="post" action="#">
+              <div class="row gtr-uniform">
+                <div class="col-6 col-12-xsmall">
+                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="City, State or Zip Code" />
+                </div>
+                <div class="col-6 col-12-xsmall">
+                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="Job Type" />
+                </div>
+                <div class="col-6 col-12-xsmall">
+                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="Distance" />
+                </div>
+                <div class="col-6 col-12-xsmall">
+                  <input type="email" name="demo-email" id="demo-email" value="" placeholder="Keyword" />
+                </div>
+                <div class="col-12">
+                  <select name="demo-category" id="demo-category">
+                    <option value="">- Category -</option>
+                    <option value="1">Full-Time</option>
+                    <option value="1">Internship</option>
+                    <option value="1">Apprenticeship</option>
+                    <option value="1">Contractor</option>
+                  </select>
+                </div>
+                <div class="col-4 col-12-small">
+                  <input type="radio" id="demo-priority-low" name="demo-priority" checked>
+                  <label for="demo-priority-low">Newest Posts</label>
+                </div>
+                <div class="col-4 col-12-small">
+                  <input type="radio" id="demo-priority-normal" name="demo-priority">
+                  <label for="demo-priority-normal">Most Popular</label>
+                </div>
+                <div class="col-4 col-12-small">
+                  <input type="radio" id="demo-priority-high" name="demo-priority">
+                  <label for="demo-priority-high">Most clicked</label>
+                </div>
+                <ul class="actions fit small">
+                  <li><a href="#" class="button fit small">clear</a></li>
+                  <li><a href="#" class="button fit small">submit</a></li>
+                  <li><a href="#" class="button fit small">cancel</a></li>
+                </ul>
+              </div>
+            </form>
+
+            <h3>Results</h3>
+            <h4>Check it out</h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Company</th>
+                    <th>Description</th>
+                    <th>Date Posted</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Google</td>
+                    <td>We are hiring backend engineer</td>
+                    <td>03-11-2019</td>
+                  </tr>
+                  <tr>
+                    <td>Facebook</td>
+                    <td>Looking for new full stack engineer</td>
+                    <td>03-11-2019</td>
+                  </tr>
+                  <tr>
+                    <td>Lyft</td>
+                    <td>Fullstack developer with 5 years experience</td>
+                    <td>03-10-2019</td>
+                  </tr>
+                  <tr>
+                    <td>Holberton School</td>
+                    <td>Junior engineers position available</td>
+                    <td>03-09-2019</td>
+                  </tr>
+                  <tr>
+                    <td>Uber</td>
+                    <td>Upcoming internship program for engineers</td>
+                    <td>02-19-2019</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td>5 results</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            </section>
+
+          </article>
+
+        <!-- Pagination -->
+          <ul class="actions pagination">
+            <li><a href="" class="disabled button large previous">Previous Page</a></li>
+            <li><a href="#" class="button large next">Next Page</a></li>
+          </ul>
+
+      </div>
+
+    <!-- Sidebar -->
+      <section id="sidebar">
+
+        <!-- Intro -->
+          <section id="intro">
+            <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="" /></a>
+            <header>
+              <h2>Career Up</h2>
+              <p>Our final fullstack project<a href="https://github.com/hcheung01/Career_path">@Github</a></p>
+            </header>
+          </section>
+
+        <!-- Footer -->
+          <section id="footer">
+            <ul class="icons">
+              <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+              <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+              <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+              <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+              <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+            <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+          </section>
+
+      </section>
+
+{% endblock content %}

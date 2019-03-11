@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Career Up</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+      <div id="wrapper">
+        <!-- Header -->
+          <header id="header">
+            <h1><a href="{{ url_for('home') }}">Career Up</a></h1>
+            <!-- <div id="api_status" style="margin-right:30px;margin-left:auto;border-radius:40px;width:40px;height:40px;background:#cccccc">
+            </div> -->
+            <nav class="links">
+              <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact Us</a></li>
+                {% if current_user.is_authenticated %}
+                  <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                  <li><a href="{{ url_for('update_account') }}">Update Account</a></li>
+                  <li><a href="{{ url_for('create_profile') }}">Create Profile</a></li>
+                {% else %}
+                  <li><a href="{{ url_for('login') }}">Login</a></li>
+                  <li><a href="{{ url_for('register') }}">Register</a><li>
+                {% endif %}
+              </ul>
+            </nav>
+            <nav class="main">
+              <ul>
+                <li class="search">
+                  <a class="fa-search" href="#search">Search</a>
+                  <form id="search" method="get" action="#">
+                    <input type="text" name="query" placeholder="Search" />
+                  </form>
+                </li>
+                <li class="menu">
+                  <a class="fa-bars" href="#menu">Menu</a>
+                </li>
+              </ul>
+            </nav>
+          </header>
+          <div class="col-md-8">
+              {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                  {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+          </div>
+
+        {% block content %}{% endblock %}
+      </div>
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+      <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script> -->
+  </body>
+</html>
