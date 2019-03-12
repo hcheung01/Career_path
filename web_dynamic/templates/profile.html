@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+  <a href="{{ url_for('create_profile') }}"><p>Click here to create new profile</p></a>
+
+  <table style="width:80%" id="profile_management">
+    <caption>Profile management</caption>
+  <tr>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Skill(s)</th>
+  </tr>
+  <tr>
+    <td>Software Engineer</td>
+    <td>San Francisco, CA</td>
+    <td>Python, C</td>
+  </tr>
+  <tr>
+    <td>Web Developer</td>
+    <td>Austin, TX</td>
+    <td>HTML, CSS, JavaScript</td>
+  </tr>
+</table>
+
+<table style="width:80%" id="job_management">
+  <caption>applied job management</caption>
+<tr>
+  <th>Title</th>
+  <th>Applied</th>
+  <th>Interview</th>
+  <th>Status</th>
+  <th>Note</th>
+</tr>
+<tr>
+  <th>Software Engineer</th>
+  <th>02/12/2019</th>
+  <th>03/01/2019</th>
+  <th>Denied</th>
+  <th>No comment</th>
+</tr>
+<tr>
+  <th>Web Developer</th>
+  <th>03/2/2019</th>
+  <th>03/18/2019</th>
+  <th></th>
+  <th>wait for interview calling</th>
+</tr>
+</table>
+
+{% endblock content %}

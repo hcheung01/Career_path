@@ -102,34 +102,6 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route("/profile/new",  methods=['GET', 'POST'])
-@login_required
-def create_profile():
-    form = ProfileForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        profile = Profile(user_id = current_user.id,
-                        position = form.position.data,
-                        location = form.location.data
-        )
-        for skill_id in form.skill.data:
-            skill = storage.get('Skill', skill_id)
-            profile.skills.append(skill)
-        # if form.more_skill.data:
-        #     skill_list = form.more_skill.data.split(',')
-        #     for skill in skill_list:
-        #         new_skill = Skill(name=skill)
-        #         storage.new(new_skill)
-        #         profile.skills.append(new_skill)
-        storage.new(profile)
-        storage.save()
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('create_profile.html',
-                            title='Profile',
-                            form=form,
-                            method='POST')
-
-
 @app.route("/update_account", methods=['GET', 'POST'])
 @login_required
 def update_account():
