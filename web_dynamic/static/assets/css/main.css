@@ -2140,13 +2140,12 @@ input, select, textarea {
 	input[type="checkbox"],
 	input[type="radio"] {
 		-moz-appearance: none;
-		-webkit-appearance: none;
+		-webkit-appearance: checkbox;
 		-ms-appearance: none;
 		appearance: none;
 		display: block;
 		float: left;
 		margin-right: -2em;
-		opacity: 0;
 		width: 1em;
 		z-index: -1;
 	}
@@ -2342,6 +2341,7 @@ input, select, textarea {
 
 		ul li {
 			padding-left: 0.5em;
+			display: flex;
 		}
 
 		ul.alt {
