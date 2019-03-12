@@ -18,76 +18,76 @@
         <!-- <div id="api_status" style="margin-right:30px;margin-left:auto;border-radius:40px;width:40px;height:40px;background:#cccccc">
 	     </div> -->
 	<nav class="main">
-              <ul>
-                <li class="search">
-                  <a class="fa-search" href="#search">Search</a>
-                  <form id="search" method="get" action="#">
-                    <input type="text" name="query" placeholder="Search" />
-                  </form>
-                </li>
-                <li class="menu">
-                  <a class="fa-bars" href="#menu">Menu</a>
-                </li>
-              </ul>
-            </nav>
+          <ul>
+            <li class="search">
+              <a class="fa-search" href="#search">Search</a>
+              <form id="search" method="get" action="#">
+                <input type="text" name="query" placeholder="Search" />
+              </form>
+            </li>
+            <li class="menu">
+              <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+          </ul>
+        </nav>
 	<!-- Menu -->
-<section id="menu">
+	<section id="menu">
 
-  <!-- Search -->
-  <section>
-    <form class="search" method="get" action="#">
-      <input type="text" name="query" placeholder="Search" />
-    </form>
-  </section>
+	  <!-- Search -->
+	  <section>
+	    <form class="search" method="get" action="#">
+	      <input type="text" name="query" placeholder="Search" />
+	    </form>
+	  </section>
 
-  <!-- Links -->
-  <section>
-    <ul class="links">
-      <li>
-        <a href="{{ url_for('home') }}">
-          <h3>Home</h3>
-        </a>
-      </li>
-      <li>
-        <a href="{{ url_for('about') }}">
-          <h3>About</h3>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <h3>Contact</h3>
-        </a>
-      </li>
-      {% if current_user.is_authenticated %}
-      <li>
-        <a href="{{ url_for('profile') }}">
-	    <h3>Profile</h3>
-	    </a>
-      </li>
-      <li>
-        <a href="{{ url_for('update account') }}">
-          <h3>Update Account</h3>
-        </a>
-      </li>
-      <li>
-        <a href="{{ url_for('logout') }}">
-          <h3>Logout</h3>
-        </a>
-      </li>
-      {% else %}
-      <li>
-        <a href="{{ url_for('login') }}">
-          <h3>Login</h3>
-        </a>
-      </li>
-      <li>
-        <a href="{{ url_for('register') }}">
-          <h3>Register</h3>
-        </a>
-      </li>
-      {% endif %}
-    </ul>
-  </section>
+	  <!-- Links -->
+	  <section>
+	    <ul class="links">
+	      <li>
+		<a href="{{ url_for('home') }}">
+		  <h3>Home</h3>
+		</a>
+	      </li>
+	      <li>
+		<a href="{{ url_for('about') }}">
+		  <h3>About</h3>
+		</a>
+	      </li>
+	      <li>
+		<a href="#">
+		  <h3>Contact</h3>
+		</a>
+	      </li>
+	      {% if current_user.is_authenticated %}
+	      <li>
+		<a href="{{ url_for('create_profile') }}">
+		  <h3>Profile</h3>
+		</a>
+	      </li>
+	      <li>
+		<a href="{{ url_for('update_account') }}">
+		  <h3>Update Account</h3>
+		</a>
+	      </li>
+	      <li>
+		<a href="{{ url_for('logout') }}">
+		  <h3>Logout</h3>
+		</a>
+	      </li>
+	      {% else %}
+	      <li>
+		<a href="{{ url_for('login') }}">
+		  <h3>Login</h3>
+		</a>
+	      </li>
+	      <li>
+		<a href="{{ url_for('register') }}">
+		  <h3>Register</h3>
+		</a>
+	      </li>
+	      {% endif %}
+	    </ul>
+	  </section>
       </header>
       <div class="col-md-8">
         {% with messages = get_flashed_messages(with_categories=true) %}
