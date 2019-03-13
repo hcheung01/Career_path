@@ -20,8 +20,8 @@ class User(BaseModel, Base, UserMixin):
     last_name = Column(String(128), nullable=False)
     phone = Column(String(20), nullable=True)
 
-    # apply = relationship('Apply', backref='user', cascade='delete')
-    # profile = relationship('Profile', backref='user', cascade='delete')
+    job = relationship('Job', backref='user', cascade='delete')
+    profile = relationship('Profile', backref='user', cascade='delete')
 
     def __init__(self, *args, **kwargs):
         """

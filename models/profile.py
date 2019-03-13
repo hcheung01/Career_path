@@ -27,8 +27,7 @@ class Profile(BaseModel, Base):
     __tablename__ = 'profile'
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     position = Column(String(128), nullable=False)
-    location = Column(String(1024), nullable=False)
-    # resume = Column()
+    location = Column(String(1024), nullable=True)
 
     skills = relationship('Skill', secondary="profile_skill",
                              viewonly=False)

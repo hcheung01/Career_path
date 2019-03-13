@@ -5,7 +5,7 @@ Place Class from Models Module
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, Float, ForeignKey,\
-    MetaData, Table, ForeignKey
+    MetaData, Table, DateTime
 from sqlalchemy.orm import backref
 
 class JobSkill(Base):
@@ -29,6 +29,11 @@ class Job(BaseModel, Base):
     position = Column(String(60), nullable=False)
     level = Column(String(60), nullable=False)
     location = Column(String(60), nullable=False)
-
+    description = Column(String(1000), nullable=True)
+    applied = Column(String(60), nullable=True)
+    interview = Column(String(60), nullable=True)
+    status = Column(String(60), nullable=True)
+    note = Column(String(300), nullable=True)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     skills = relationship('Skill', secondary="job_skill",
                              viewonly=False)

@@ -18,7 +18,7 @@ class DBStorage:
         'Job': job.Job,
         'Skill': skill.Skill,
         'Profile': profile.Profile,
-        'User': user.User
+        'User': user.User,
     }
 
     """
