@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom.css') }}" />
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script>
   </head>
 
@@ -88,12 +89,24 @@
 	      {% endif %}
 	    </ul>
 	  </section>
+	  <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+	  </div>
+
       </header>
       <div class="col-md-8">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
+        <div id="already-logged-in"class="alert alert-{{ category }}">
           {{ message }}
         </div>
         {% endfor %}
@@ -111,7 +124,8 @@
     <script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
     <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script> -->
-  <!-- Footer -->
+
+<!-- Footer -->
     <footer id="footer">
       <ul class="icons">
         <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
