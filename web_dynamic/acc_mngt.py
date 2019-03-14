@@ -11,7 +11,6 @@ from .forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetF
 from models.user import User
 from models.profile import Profile
 from models.job import Job
-from models.apply import Apply
 from flask_login import login_user, current_user, logout_user, login_required, LoginManager
 import uuid
 import json
