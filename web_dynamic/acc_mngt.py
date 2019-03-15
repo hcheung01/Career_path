@@ -52,7 +52,7 @@ def about():
     handles request to custom template
     """
     if current_user.is_authenticated:
-        flash('you are loged in')
+        flash('You are loged in.')
     return render_template('about.html', title='about')
 
 @app.route('/login', methods=['GET', 'POST'])

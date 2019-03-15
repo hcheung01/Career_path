@@ -208,7 +208,6 @@ input, select, textarea {
 		font-weight: 800;
 		letter-spacing: 0.25em;
 		line-height: 1.65;
-		margin: 0 0 1em 0;
 		text-transform: uppercase;
 	}
 
@@ -2138,6 +2137,9 @@ input, select, textarea {
 	}
 
 	input[type="checkbox"] {
+	    postion: absolute !important;
+	    left: 7px !important;
+	    top-margin: 7.5px !important;
 		-moz-appearance: none;
 		-webkit-appearance: checkbox;
 		-ms-appearance: none;
@@ -3059,7 +3061,7 @@ input, select, textarea {
 		#header h1 {
 			height: inherit;
 			line-height: inherit;
-			padding: 0 0 0 1.5em;
+			padding: 0 0 0 0;
 			white-space: nowrap;
 		}
 
@@ -3206,7 +3208,7 @@ input, select, textarea {
 			}
 
 				#header h1 {
-					padding: 0 0 0 1em;
+					padding: 0 0 0 0;
 				}
 
 				#header .main .search {

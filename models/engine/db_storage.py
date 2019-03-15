@@ -7,7 +7,7 @@ import os
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
-from models import base_model, skill, profile, job, user
+from models import base_model, skill, profile, job, user, job_db
 
 
 class DBStorage:
@@ -19,6 +19,7 @@ class DBStorage:
         'Skill': skill.Skill,
         'Profile': profile.Profile,
         'User': user.User,
+        'Job_db': job_db.Job_db
     }
 
     """

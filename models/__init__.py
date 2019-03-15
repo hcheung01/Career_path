@@ -3,6 +3,7 @@ from models.skill import Skill
 from models.profile import Profile
 from models.job import Job
 from models.user import User
+from models.job_db import Job_db
 
 """CNC - dictionary = { Class Name (string) : Class Type }"""
 

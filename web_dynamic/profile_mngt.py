@@ -120,6 +120,7 @@ def profile_update(profile_id=None):
                             method='POST')
 
 @app.route('/job_update/<job_id>', methods=['GET', 'PUT'])
+@login_required
 def job_update(job_id=None):
     job_obj = storage.get('Job', job_id)
     if job_obj is None:
@@ -130,3 +131,11 @@ def job_update(job_id=None):
             abort(400, 'Not a JSON')
         job_obj.bm_update(req_json)
         return jsonify(job_obj.to_json()), 200
+
+@app.route('/job_search_profile/<profile_id>', methods=['GET'])
+@login_required
+def job_search_profile(profile_id):
+    jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_by_profile/' + profile_id)
+    return render_template('job_search_profile.html',
+                            jobs=jobs.json(),
+                            user_id=current_user.id)

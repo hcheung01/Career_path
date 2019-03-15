@@ -33,6 +33,26 @@
                   let autocomplete = new google.maps.places.Autocomplete(input);
                 </script>
             </div>
+
+            <button id="drop-skills">
+	      Skills
+            </button>
+	    <div class="form-group" id="skills">
+              {{ form.skills.label(class="form-control-label") }}
+              {% if form.skills.errors %}
+              {{ form.skills(class="form-control form-control-lg is-invalid\
+	      ") }}
+              <div class="invalid-feedback">
+                {% for error in form.skills.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.skills(class="form-control form-control-lg") }}
+              {% endif %}
+	    </div>
+
+<!--
             <div class="form-group" id="skills">
                 {{ form.skills.label(class="form-control-label") }}
                 {% if form.skills.errors %}
@@ -46,6 +66,7 @@
                       {{ form.skills(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+-->
             <div class="form-group" id="more_skill">
                 {{ form.more_skill.label(class="form-control-label") }}
                 {% if form.more_skill.errors %}
