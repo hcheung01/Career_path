@@ -16,19 +16,15 @@
 
             <section>
             <h3>preferences</h3>
-            <form method="post" action="#">
-              <div class="row gtr-uniform">
                 <div class="col-6 col-12-xsmall">
-                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="City, State or Zip Code" />
+                  <input type="text" id="location_box"/>
                 </div>
+                <script>
+                  let input = document.getElementById('location_box');
+                  let autocomplete = new google.maps.places.Autocomplete(input);
+                </script>
                 <div class="col-6 col-12-xsmall">
-                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="Job Type" />
-                </div>
-                <div class="col-6 col-12-xsmall">
-                  <input type="text" name="demo-name" id="demo-name" value="" placeholder="Distance" />
-                </div>
-                <div class="col-6 col-12-xsmall">
-                  <input type="email" name="demo-email" id="demo-email" value="" placeholder="Keyword" />
+                  <input type="text" name="demo-name" id="position_box" value="" placeholder="Position" />
                 </div>
                 <div class="col-12">
                   <select name="demo-category" id="demo-category">
@@ -39,25 +35,27 @@
                     <option value="1">Contractor</option>
                   </select>
                 </div>
-                <div class="col-4 col-12-small">
-                  <input type="radio" id="demo-priority-low" name="demo-priority" checked>
-                  <label for="demo-priority-low">Newest Posts</label>
-                </div>
-                <div class="col-4 col-12-small">
-                  <input type="radio" id="demo-priority-normal" name="demo-priority">
-                  <label for="demo-priority-normal">Most Popular</label>
-                </div>
-                <div class="col-4 col-12-small">
-                  <input type="radio" id="demo-priority-high" name="demo-priority">
-                  <label for="demo-priority-high">Most clicked</label>
-                </div>
-                <ul class="actions fit small">
-                  <li><a href="#" class="button fit small">clear</a></li>
-                  <li><a href="#" class="button fit small">submit</a></li>
-                  <li><a href="#" class="button fit small">cancel</a></li>
+                <ul>
+                  <button class="job_query_submit" onclick="myFunction();">submit</button>
                 </ul>
-              </div>
-            </form>
+                <script>
+                  function myFunction() {
+                    let location = document.getElementById('location_box').value;
+                    let position = document.getElementById('position_box').value;
+                    if (location.length < 1) {
+                      location = "None";
+                    } else {
+                      location = location.split(' ').join('_');
+                    }
+                    if (position.length < 1) {
+                      position = "None";
+                    } else {
+                      position = position.split(' ').join('_');
+                    }
+                    let url = 'http://0.0.0.0:5000/job_search/' + position + '/' + location;
+                    window.location.href=url;
+                  };
+                </script>
 
             <h3>Results</h3>
             <div class="table-wrapper">
@@ -65,36 +63,22 @@
                 <thead>
                   <tr>
                     <th>Company</th>
+                    <th>Position</th>
+                    <th>Location</th>
                     <th>Description</th>
                     <th>Date Posted</th>
                   </tr>
                 </thead>
                 <tbody>
+                  {% for job in jobs %}
                   <tr>
-                    <td>Google</td>
-                    <td>We are hiring backend engineer</td>
-                    <td>03-11-2019</td>
+                    <td>{{ job.company }}</td>
+                    <td>{{ job.position }}</td>
+                    <td>{{ job.location }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>{{ job.data_post }}</td>
                   </tr>
-                  <tr>
-                    <td>Facebook</td>
-                    <td>Looking for new full stack engineer</td>
-                    <td>03-11-2019</td>
-                  </tr>
-                  <tr>
-                    <td>Lyft</td>
-                    <td>Fullstack developer with 5 years experience</td>
-                    <td>03-10-2019</td>
-                  </tr>
-                  <tr>
-                    <td>Holberton School</td>
-                    <td>Junior engineers position available</td>
-                    <td>03-09-2019</td>
-                  </tr>
-                  <tr>
-                    <td>Uber</td>
-                    <td>Upcoming internship program for engineers</td>
-                    <td>02-19-2019</td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
                 <tfoot>
                   <tr>

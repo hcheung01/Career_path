@@ -36,8 +36,15 @@ def home():
     """
     if current_user.is_authenticated:
         flash('you are loged in')
+    jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_gereral')
     return render_template('home.html',
-                           title='home')
+                           title='home', jobs=jobs.json())
+
+@app.route('/job_search/<position>/<location>', methods=['GET', 'POST'])
+def job_search(position=None, location=None):
+    jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_by_criteria/' + position + '/' + location)
+    return render_template('job_search.html',
+                           title='job_search', jobs=jobs.json())
 
 @app.route('/about')
 def about():
