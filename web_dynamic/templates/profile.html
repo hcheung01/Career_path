@@ -34,6 +34,7 @@
 <table style="width:100%" id="job_management">
   <caption>Viewed Jobs</caption>
 <tr>
+  <th>Company</th>
   <th>Title</th>
   <th>Applied</th>
   <th>Interview</th>
@@ -42,7 +43,8 @@
   <th>Action</th>
 </tr>
   {% for job in job_list %}
-  <tr>
+  <tr class="{{ job.id }}">
+    <th>{{ job.Company }}</th>
     <th>{{ job.position }}</th>
     {% if job.applied %}
       <th>{{ job.applied }}</th>
@@ -71,6 +73,7 @@
     </th>
     <th>
       <button onclick="saveFunc()">Save</button>
+      <button onclick="delFunc()">Delete</button>
       <script>
       function saveFunc() {
         dic = {}
@@ -92,10 +95,22 @@
           url: 'http://0.0.0.0:5000/job_update/{{ job.id }}',
           type: 'put',
           dataType: 'json',
-          // data: JSON.jsonify(dic),
           data: JSON.stringify(dic),
           contentType: 'application/json',
-          success: function(data){}
+          success: function(data){
+            location.reload();
+          }
+        });
+      }
+      function delFunc() {
+        $.ajax({
+          url: 'http://0.0.0.0:5000/job_delete/{{ job.id }}',
+          type: 'get',
+          success: function(data){
+            if (data) {
+              location.reload();
+            }
+          }
         });
       }
       </script>

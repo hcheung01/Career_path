@@ -12,7 +12,11 @@
   </tr>
   {% for job in jobs %}
   <tr>
-    <td>{{ job.position }}</td>
+    {% if user_id != None %}
+      <td><a href="http://0.0.0.0:5000/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</td>
+    {% else %}
+      <td>{{ job.position }}</td>
+    {% endif %}
     <td>{{ job.company }}</td>
     <td>{{ job.location }}</td>
     <td>{{ job.level }}</td>

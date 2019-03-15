@@ -11,8 +11,7 @@ class Job_db(BaseModel, Base):
     __tablename__ = 'job_db'
     company = Column(String(60), nullable=False)
     location = Column(String(60), nullable=False)
-    position = Column(String(60), nullable=False)
-    description = Column(String(500), nullable=False)
-    level = Column(String(60), nullable=True)
-    link = Column(String(500), nullable=False)
-    data_post = Column(DateTime, nullable=False)
+    position = Column(String(120), nullable=False)
+    description = Column(String(5000), nullable=False)
+    link = Column(String(1000), nullable=False)
+    date_post = Column(Integer, nullable=False)

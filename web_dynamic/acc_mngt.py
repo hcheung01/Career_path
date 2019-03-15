@@ -43,8 +43,16 @@ def home():
 @app.route('/job_search/<position>/<location>', methods=['GET', 'POST'])
 def job_search(position=None, location=None):
     jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_by_criteria/' + position + '/' + location)
-    return render_template('job_search.html',
-                           title='job_search', jobs=jobs.json())
+    if current_user.is_authenticated:
+        return render_template('job_search.html',
+                               title='job_search',
+                               jobs=jobs.json(),
+                               user_id=current_user.id)
+    else:
+        return render_template('job_search.html',
+                               title='job_search',
+                               jobs=jobs.json(),
+                               user_id=None)
 
 @app.route('/about')
 def about():

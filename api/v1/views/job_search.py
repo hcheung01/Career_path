@@ -71,20 +71,3 @@ def job_search_by_profile(profile_id=None):
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
     sorted_job_list = sorted(filter_list, key=lambda k: k['data_post'])
     return jsonify(sorted_job_list)
-
-@app_views.route('/job_add/<user_id>/<job_db_id>', methods=['GET', 'POST'])
-def job_add(user_id=None, job_db_id=None):
-    job_db_obj = storage.get('Job_db', job_db_id)
-    if job_db_obj is None:
-        abort(404, 'Not found')
-    new_job = Job(
-        company = job_db_obj.company,
-        position = job_db_obj.position,
-        level = job_db_obj.level,
-        location = job_db_obj.location,
-        description = job_db_obj.description,
-        user_id = user_id
-    )
-    storage.new(new_job)
-    storage.save()
-    return redirect('http://0.0.0.0:5000/')

@@ -24,8 +24,5 @@ def load_user(user_id):
         if user.id == user_id:
             return user
 
-# port = 5000
-# host = '0.0.0.0'
-
 from web_dynamic import acc_mngt
 from web_dynamic import profile_mngt

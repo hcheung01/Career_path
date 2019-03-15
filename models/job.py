@@ -27,7 +27,6 @@ class Job(BaseModel, Base):
     __tablename__ = 'job'
     company = Column(String(60), nullable=False)
     position = Column(String(60), nullable=False)
-    level = Column(String(60), nullable=False)
     location = Column(String(60), nullable=False)
     description = Column(String(1000), nullable=True)
     applied = Column(String(60), nullable=True)

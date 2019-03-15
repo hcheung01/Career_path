@@ -2,7 +2,7 @@
 """
 Flask App that integrates with CareerUp static HTML Template
 """
-from flask import render_template, url_for, flash, redirect, request, Flask, jsonify
+from flask import render_template, url_for, flash, redirect, request, Flask, jsonify, abort
 from models import storage
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import requests
@@ -129,8 +129,28 @@ def job_update(job_id=None):
         req_json = request.get_json()
         if req_json is None:
             abort(400, 'Not a JSON')
+        if 'applied' in req_json.keys():
+            if req_json['applied'] == '':
+                del req_json['applied']
+        if 'interview' in req_json.keys():
+            if req_json['interview'] == '':
+                del req_json['interview']
+        print(req_json)
         job_obj.bm_update(req_json)
-        return jsonify(job_obj.to_json()), 200
+    return render_template('profile.html')
+
+@app.route('/job_delete/<job_id>', methods=['GET', 'PUT'])
+@login_required
+def job_delete(job_id=None):
+    job_obj = storage.get('Job', job_id)
+    if job_obj is None:
+        abort(404)
+    job_obj.delete()
+    return render_template('profile.html')
+
+
+
+
 
 @app.route('/job_search_profile/<profile_id>', methods=['GET'])
 @login_required
@@ -139,3 +159,21 @@ def job_search_profile(profile_id):
     return render_template('job_search_profile.html',
                             jobs=jobs.json(),
                             user_id=current_user.id)
+
+@app.route('/job_add/<user_id>/<job_db_id>', methods=['GET', 'POST'])
+@login_required
+def job_add(user_id=None, job_db_id=None):
+    job_db_obj = storage.get('Job_db', job_db_id)
+    if job_db_obj is None:
+        abort(404, 'Not found')
+    new_job = Job(
+        company = job_db_obj.company,
+        position = job_db_obj.position,
+        level = job_db_obj.level,
+        location = job_db_obj.location,
+        description = job_db_obj.description,
+        user_id = user_id
+    )
+    storage.new(new_job)
+    storage.save()
+    return render_template('job_detail.html', job_db_obj=job_db_obj)
