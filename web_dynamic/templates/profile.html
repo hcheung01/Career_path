@@ -6,7 +6,7 @@
   <table style="width:100%" id="profile_management">
     <caption>Profile management</caption>
   <tr>
-    <th>Title</th>
+    <th>Position</th>
     <th>Location</th>
     <th>Skill(s)</th>
     <th>Update</th>
@@ -14,7 +14,7 @@
   </tr>
   {% for prof in profile_list %}
   <tr>
-    <td>{{ prof.position }}</td>
+    <td><a href="/job_search_profile/{{ prof.id }}"</a>{{ prof.position }}</td>
     <td>{{ prof.location }}</td>
     <td>
     {% for skill in prof.skills %}
@@ -41,8 +41,8 @@
   <th>Note</th>
   <th>Action</th>
 </tr>
-<tr>
   {% for job in job_list %}
+  <tr>
     <th>{{ job.position }}</th>
     {% if job.applied %}
       <th>{{ job.applied }}</th>
@@ -100,8 +100,9 @@
       }
       </script>
     </th>
+  </tr>
   {% endfor %}
-</tr>
+
 </table>
 </div>
 

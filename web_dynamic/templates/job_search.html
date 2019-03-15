@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+  <table style="width:100%" id="result_job">
+    <caption>Result</caption>
+  <tr>
+    <th>Position</th>
+    <th>Company</th>
+    <th>Location</th>
+    <th>Level</th>
+    <th>Date Post</th>
+    <th>Skill(s)</th>
+  </tr>
+  {% for job in jobs %}
+  <tr>
+    <td>{{ job.position }}</td>
+    <td>{{ job.company }}</td>
+    <td>{{ job.location }}</td>
+    <td>{{ job.level }}</td>
+    <td>{{ job.data_post }}</td>
+    <td>
+    {% if job.skills %}
+      {% for skill in job.skills %}
+        {{ skill }},
+      {% endfor %}
+    {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}
