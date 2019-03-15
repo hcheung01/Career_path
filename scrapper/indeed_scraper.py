@@ -50,13 +50,26 @@ def scrape_links(url):
             if job_page:
                 job_obj.update(job_page)
                 all_job_list.append(job_obj)
-#                for k, v in job_obj.items():
-#                    print("KEY IS: ", k)
-#                    print("VALUE IS: ", v)
-#                    print("----------------------------------------------")
-#                print("++++++++++++++++++++++++++++++++++++++++++++++++")
             job_obj = {}
+    return all_job_list
 
+def get_jobs_list(total_jobs):
+
+    min_pages = total_jobs // 50
+    page_ct = 0
+    all_jobs = []
+
+    url = "https://www.indeed.com/jobs?q=software+engineer&l=San+Francisco,+CA&limit=50&fromage=15&radius=25&start="
+
+    for i in range(min_pages):
+        url_list = url + str(page_ct)
+        jobs_per_link = scrape_links(url)
+        all_jobs.extend(jobs_per_link)
+        page_ct += 50
+    print(all_jobs)
+    print(len(all_jobs))
 
 if __name__ == "__main__":
-    scrape_links("https://www.indeed.com/jobs?as_and=software+engineer&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=25&l=San+Francisco+Bay+Area%2C+CA&fromage=any&limit=50&sort=&psf=advsrch")
+#    scrape_links("https://www.indeed.com/jobs?as_and=software+engineer&as_phr=&as_any=&as_not=&as_t#tl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=25&l=San+Francisco+Bay+Area%2C+CA&fromage=any&limit=5#0&sort=&psf=advsrch")
+
+    get_jobs_list(101)
