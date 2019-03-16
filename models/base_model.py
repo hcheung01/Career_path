@@ -52,10 +52,6 @@ class BaseModel:
             attr_dict['updated_at'] = datetime.strptime(
                 attr_dict['updated_at'], "%Y-%m-%d %H:%M:%S.%f"
             )
-        if 'date_post' in attr_dict:
-            attr_dict['date_post'] = datetime.strptime(
-                attr_dict['date_post'], "%Y-%m-%d"
-            )
         for attr, val in attr_dict.items():
             if attr != 'date_post':
                 setattr(self, attr, val)

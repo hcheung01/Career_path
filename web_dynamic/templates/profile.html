@@ -44,7 +44,7 @@
 </tr>
   {% for job in job_list %}
   <tr class="{{ job.id }}">
-    <th>{{ job.Company }}</th>
+    <th>{{ job.company }}</th>
     <th>{{ job.position }}</th>
     {% if job.applied %}
       <th>{{ job.applied }}</th>

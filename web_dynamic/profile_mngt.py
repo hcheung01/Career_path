@@ -169,7 +169,6 @@ def job_add(user_id=None, job_db_id=None):
     new_job = Job(
         company = job_db_obj.company,
         position = job_db_obj.position,
-        level = job_db_obj.level,
         location = job_db_obj.location,
         description = job_db_obj.description,
         user_id = user_id
