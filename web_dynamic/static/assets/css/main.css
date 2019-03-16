@@ -3069,6 +3069,7 @@ input, select, textarea {
 
 			#header h1 a {
 				font-size: 0.7em;
+				padding-left: 14px;
 			}
 
 		#header .links {
