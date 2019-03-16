@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body class="single is-preload">
 
@@ -301,6 +302,11 @@
 									<option value="1">Administration</option>
 									<option value="1">Human Resources</option>
 								</select>
+								<script type="text/javascript">
+									$('#demo-category').click(function() {
+										$(this).show()
+									})
+								</script>
 							</div>
 							<div class="col-4 col-12-small">
 								<input type="radio" id="demo-priority-low" name="demo-priority" checked>
