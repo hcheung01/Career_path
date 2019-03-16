@@ -34,39 +34,32 @@
                 </script>
             </div>
 
-            <button id="drop-skills">
-	      Skills
-            </button>
-	    <div class="form-group" id="skills">
-              {{ form.skills.label(class="form-control-label") }}
-              {% if form.skills.errors %}
-              {{ form.skills(class="form-control form-control-lg is-invalid\
-	      ") }}
-              <div class="invalid-feedback">
-                {% for error in form.skills.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-              </div>
-              {% else %}
-              {{ form.skills(class="form-control form-control-lg") }}
-              {% endif %}
-	    </div>
+	    <div class="col-12">
+	      <select name="demo-category" id="demo-category">
+		<option value="">- Skills -</option>
+		<option value="1">Python</option>
+		<option value="1">CSS</option>
+		<option value="1">Bash</option>
+		<option value="1">C</option>
+	      </select>
 
-<!--
+	    <!--
             <div class="form-group" id="skills">
                 {{ form.skills.label(class="form-control-label") }}
                 {% if form.skills.errors %}
-                    {{ form.skills(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.skills.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
+                {{ form.skills(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.skills.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
                 {% else %}
-                      {{ form.skills(class="form-control form-control-lg") }}
+                {{ form.skills(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
--->
+
+	    -->
+
             <div class="form-group" id="more_skill">
                 {{ form.more_skill.label(class="form-control-label") }}
                 {% if form.more_skill.errors %}
