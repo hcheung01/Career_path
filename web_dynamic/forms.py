@@ -9,13 +9,13 @@ from flask_login import current_user
 
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField('first_name',
+    first_name = StringField('First Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    last_name = StringField('last_name',
+    last_name = StringField('Last Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('email',
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    phone = StringField('phone')
+    phone = StringField('Phone')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
@@ -43,12 +43,12 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    first_name = StringField('first_name',
+    first_name = StringField('First Name',
                            validators=[Length(min=2, max=20)])
-    last_name = StringField('last_name',
+    last_name = StringField('Last Name',
                             validators=[Length(min=2, max=20)])
     email = StringField('Email', validators=[Email()])
-    phone = StringField('Phone_number')
+    phone = StringField('Phone Number')
     submit = SubmitField('Update')
     def validate_email(self, email):
         all_users = storage.all('User').values()
