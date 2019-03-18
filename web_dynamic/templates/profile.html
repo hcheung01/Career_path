@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="job_mgnt">
+  <a href="{{ url_for('create_profile') }}"><p>Click here to create new profile</p></a>
+
+  <table style="width:100%" id="profile_management">
+    <caption>Profile management</caption>
+  <tr>
+    <th>Position</th>
+    <th>Location</th>
+    <th>Skill(s)</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  {% for prof in profile_list %}
+  <tr>
+    <td><a href="/job_search_profile/{{ prof.id }}"</a>{{ prof.position }}</td>
+    <td>{{ prof.location }}</td>
+    <td>
+    {% for skill in prof.skills %}
+      {{ skill.name }},
+    {% endfor %}
+    </td>
+    <td>
+      <a href="/profile_update/{{ prof.id }}">Click here to Update</a>
+    </td>
+    <td>
+      <a href="/profile_delete/{{ prof.id }}">Click here to Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table style="width:100%" id="job_management">
+  <caption>Viewed Jobs</caption>
+<tr>
+  <th>Company</th>
+  <th>Title</th>
+  <th>Applied</th>
+  <th>Interview</th>
+  <th>Status</th>
+  <th>Note</th>
+  <th>Action</th>
+</tr>
+  {% for job in job_list %}
+  <tr class="{{ job.id }}">
+    <th>{{ job.company }}</th>
+    <th>{{ job.position }}</th>
+    {% if job.applied %}
+      <th>{{ job.applied }}</th>
+    {% else %}
+    <th>
+      <input type="date" name="apply_date" id="{{ job.id }}apply">
+    </th>
+    {% endif %}
+    {% if job.interview %}
+      <th>{{ job.interview }}</th>
+    {% else %}
+      <th>
+        <input type="datetime-local" name="interview_time" id="{{ job.id }}interview">
+      </th>
+    {% endif %}
+    {% if job.status %}
+      <th>{{ job.status }}</th>
+    {% else %}
+      <th>
+        <p><input type="checkbox" id="{{ job.id }}aproved" data-name="Aproved" style="margin-right: 10px">Aproved</p>
+        <p><input type="checkbox" id="{{ job.id }}denied" data-name="Denied"  style="margin-right: 10px">Denied</p>
+      </th>
+    {% endif %}
+    <th>
+      <input type="text" id="{{ job.id }}text" name="job_status" value="{{ job.note }}">
+    </th>
+    <th>
+      <button onclick="saveFunc()">Save</button>
+      <button onclick="delFunc()">Delete</button>
+      <script>
+      function saveFunc() {
+        dic = {}
+        if ('{{ job.status }}'.length < 6) {
+          if (document.getElementById("{{ job.id }}aproved").checked) {
+            dic['status'] = 'Aproved'
+          } else if (document.getElementById("{{ job.id }}denied").checked) {
+            dic['status'] = 'Denied'
+          }
+        }
+        dic['note'] = document.getElementById("{{ job.id }}text").value
+        if ('{{ job.interview }}'.length < 6) {
+          dic['interview'] = document.getElementById("{{ job.id }}interview").value
+        }
+        if ('{{ job.applied }}'.length < 6) {
+          dic['applied'] = document.getElementById("{{ job.id }}apply").value
+        }
+        $.ajax({
+          url: 'http://0.0.0.0:5000/job_update/{{ job.id }}',
+          type: 'put',
+          dataType: 'json',
+          data: JSON.stringify(dic),
+          contentType: 'application/json',
+          success: function(data){
+            location.reload();
+          }
+        });
+      }
+      function delFunc() {
+        $.ajax({
+          url: 'http://0.0.0.0:5000/job_delete/{{ job.id }}',
+          type: 'get',
+          success: function(data){
+            if (data) {
+              location.reload();
+            }
+          }
+        });
+      }
+      </script>
+    </th>
+  </tr>
+  {% endfor %}
+
+</table>
+</div>
+
+{% endblock content %}

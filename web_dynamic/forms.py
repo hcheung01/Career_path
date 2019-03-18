@@ -59,13 +59,13 @@ class UpdateAccountForm(FlaskForm):
 
 class ProfileForm(FlaskForm):
     position = StringField('position', validators=[DataRequired(), Length(min=2, max=20)])
-    location = StringField('location', validators=[DataRequired(), Length(min=2)])
+    location = StringField('location')
     all_skills = storage.all('Skill').values()
     skills = SelectMultipleField('skills',
                                     choices = [(skill.id, skill.name) for skill in all_skills],
                                     widget=widgets.ListWidget(prefix_label=True),
                                     option_widget=widgets.CheckboxInput())
-    more_skill = StringField('Other_skill')
+    more_skill = StringField('more_skill')
     submit = SubmitField('Post')
 
 class RequestResetForm(FlaskForm):

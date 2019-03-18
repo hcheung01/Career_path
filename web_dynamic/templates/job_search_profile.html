@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+  <table style="width:100%" id="profile_management">
+    <caption>Matching jobs</caption>
+  <tr>
+    <th>Position</th>
+    <th>Company</th>
+    <th>Location</th>
+    <th>Level</th>
+    <th>Date Post</th>
+    <th>Skill(s)</th>
+    <th>Skill Match</th>
+  </tr>
+  {% for job in jobs %}
+  <tr>
+    <td><a href="http://0.0.0.0:5000/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</a></td>
+    <td>{{ job.company }}</td>
+    <td>{{ job.location }}</td>
+    <td>{{ job.level }}</td>
+    <td>{{ job.date_post }}</td>
+    <td>
+    {% if job.skills %}
+      {% for skill in job.skills %}
+        {{ skill }},
+      {% endfor %}
+    {% endif %}
+    </td>
+    <td>{{ job.skill_match }}</td>
+
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}

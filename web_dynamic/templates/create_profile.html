@@ -18,11 +18,6 @@
             </div>
             <div class="form-group" id="location">
                 {{ form.location.label(class="form-control-label") }}
-                <!-- <input type="text" name="text" id='city_box'> -->
-                <!-- <script>
-                  let input = document.getElementById('city_box');
-                  let autocomplete = new google.maps.places.Autocomplete(input);
-                </script> -->
                 {% if form.location.errors %}
                     {{ form.location(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
@@ -31,13 +26,33 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.position(type='text', class="form-control form-control-lg", id='city_box') }}
+                    {{ form.location(type='text', class="form-control form-control-lg", id='city_box') }}
                 {% endif %}
                 <script>
                   let input = document.getElementById('city_box');
                   let autocomplete = new google.maps.places.Autocomplete(input);
                 </script>
             </div>
+
+            <button id="drop-skills">
+	      Skills
+            </button>
+	    <div class="form-group" id="skills">
+              {{ form.skills.label(class="form-control-label") }}
+              {% if form.skills.errors %}
+              {{ form.skills(class="form-control form-control-lg is-invalid\
+	      ") }}
+              <div class="invalid-feedback">
+                {% for error in form.skills.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %}
+              {{ form.skills(class="form-control form-control-lg") }}
+              {% endif %}
+	    </div>
+
+<!--
             <div class="form-group" id="skills">
                 {{ form.skills.label(class="form-control-label") }}
                 {% if form.skills.errors %}
@@ -51,6 +66,7 @@
                       {{ form.skills(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+-->
             <div class="form-group" id="more_skill">
                 {{ form.more_skill.label(class="form-control-label") }}
                 {% if form.more_skill.errors %}

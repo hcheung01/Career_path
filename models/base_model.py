@@ -53,7 +53,8 @@ class BaseModel:
                 attr_dict['updated_at'], "%Y-%m-%d %H:%M:%S.%f"
             )
         for attr, val in attr_dict.items():
-            setattr(self, attr, val)
+            if attr != 'date_post':
+                setattr(self, attr, val)
 
     def __is_serializable(self, obj_v):
         """

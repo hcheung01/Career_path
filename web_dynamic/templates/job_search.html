@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+  <table style="width:100%" id="result_job">
+    <caption>Result</caption>
+  <tr>
+    <th>Position</th>
+    <th>Company</th>
+    <th>Location</th>
+    <th>Date Post</th>
+    <th>Skill(s)</th>
+  </tr>
+  {% for job in jobs %}
+  <tr>
+    {% if user_id != None %}
+      <td><a href="http://0.0.0.0:5000/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</td>
+    {% else %}
+      <td>{{ job.position }}</td>
+    {% endif %}
+    <td>{{ job.company }}</td>
+    <td>{{ job.location }}</td>
+    <td>{{ job.date_post }} day(s) ago</td>
+    <td>
+    {% if job.skills %}
+      {% for skill in job.skills %}
+        {{ skill }},
+      {% endfor %}
+    {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}

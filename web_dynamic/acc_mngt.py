@@ -11,7 +11,6 @@ from .forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetF
 from models.user import User
 from models.profile import Profile
 from models.job import Job
-from models.apply import Apply
 from flask_login import login_user, current_user, logout_user, login_required, LoginManager
 import uuid
 import json
@@ -36,8 +35,24 @@ def home():
     handles request to custom template
     """
     if current_user.is_authenticated:
+        flash('you are loged in')
+    jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_gereral')
     return render_template('home.html',
-                           title='home')
+                           title='home', jobs=jobs.json())
+
+@app.route('/job_search/<position>/<location>', methods=['GET', 'POST'])
+def job_search(position=None, location=None):
+    jobs = requests.get('http://0.0.0.0:5001/api/v1/job_search_by_criteria/' + position + '/' + location)
+    if current_user.is_authenticated:
+        return render_template('job_search.html',
+                               title='job_search',
+                               jobs=jobs.json(),
+                               user_id=current_user.id)
+    else:
+        return render_template('job_search.html',
+                               title='job_search',
+                               jobs=jobs.json(),
+                               user_id=None)
 
 @app.route('/about')
 def about():
@@ -45,8 +60,8 @@ def about():
     handles request to custom template
     """
     if current_user.is_authenticated:
-    return render_template('about.html',
-                           title='about')
+        flash('You are loged in.')
+    return render_template('about.html', title='about')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -99,34 +114,6 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
-
-@app.route("/profile/new",  methods=['GET', 'POST'])
-@login_required
-def create_profile():
-    form = ProfileForm()
-    if request.method == 'POST' and form.validate_on_submit():
-        profile = Profile(user_id = current_user.id,
-                        position = form.position.data,
-                        location = form.location.data
-        )
-        for skill_id in form.skill.data:
-            skill = storage.get('Skill', skill_id)
-            profile.skills.append(skill)
-        # if form.more_skill.data:
-        #     skill_list = form.more_skill.data.split(',')
-        #     for skill in skill_list:
-        #         new_skill = Skill(name=skill)
-        #         storage.new(new_skill)
-        #         profile.skills.append(new_skill)
-        storage.new(profile)
-        storage.save()
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('create_profile.html',
-                            title='Profile',
-                            form=form,
-                            method='POST')
 
 
 @app.route("/update_account", methods=['GET', 'POST'])

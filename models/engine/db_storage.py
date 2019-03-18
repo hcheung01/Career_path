@@ -7,7 +7,7 @@ import os
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
-from models import base_model, skill, profile, job, user
+from models import base_model, skill, profile, job, user, job_db
 
 
 class DBStorage:
@@ -18,7 +18,8 @@ class DBStorage:
         'Job': job.Job,
         'Skill': skill.Skill,
         'Profile': profile.Profile,
-        'User': user.User
+        'User': user.User,
+        'Job_db': job_db.Job_db
     }
 
     """
@@ -32,7 +33,7 @@ class DBStorage:
             creates the engine self.__engine
         """
         self.__engine = create_engine(
-            'mysql+mysqldb://{}:{}@{}/{}'.format(
+            'mysql+mysqldb://{}:{}@{}/{}?charset=utf8mb4'.format(
                 'career_path',
                 'career_path_pwd',
                 os.environ.get('HOST'),
