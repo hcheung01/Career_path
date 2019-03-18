@@ -36,7 +36,7 @@ def find_keywords(description):
                 "atlassian", "angularjs", "flask", "scikitlearn", "theano",
                 "numpy", "scipy", "panda", "tableau", "gensim", "rpc",
                 "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
-                "kinesis", "lambda", "typescript"}
+                "kinesis", "lambda", "typescript", "gradle", "buck", "bazel"}
 
     found = [s for s in d_list if s.lower() in keywords]
     print(found)
