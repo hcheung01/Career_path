@@ -31,7 +31,7 @@ def job_search_gereral():
         job search route to handle http method for requested job query by profile
     """
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
-    sorted_job_list = sorted(job_list, key=lambda k: k['data_post'])
+    sorted_job_list = sorted(job_list, key=lambda k: k['date_post'])
     return jsonify(sorted_job_list)
 
 @app_views.route('/job_search_by_criteria/<position>/<location>', methods=['GET'])
@@ -44,7 +44,7 @@ def job_search_by_criteria(position=None, location=None):
 
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
     if location == 'None' and position == 'None':
-        sorted_job_list = sorted(job_list, key=lambda k: k['data_post'])
+        sorted_job_list = sorted(job_list, key=lambda k: k['date_post'])
     else:
         if location != 'None' and position != 'None':
             location = " ".join(location.split('_'))
@@ -56,7 +56,7 @@ def job_search_by_criteria(position=None, location=None):
         else:
             location = " ".join(location.split('_'))
             filter_list = [job for job in job_list if (relative_compare(location, job['location']))]
-        sorted_job_list = sorted(filter_list, key=lambda k: k['data_post'])
+        sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
     return jsonify(sorted_job_list)
 
 @app_views.route('/job_search_by_profile/<profile_id>', methods=['GET'])
@@ -69,5 +69,5 @@ def job_search_by_profile(profile_id=None):
         abort(404, 'Not found')
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
-    sorted_job_list = sorted(filter_list, key=lambda k: k['data_post'])
+    sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
     return jsonify(sorted_job_list)

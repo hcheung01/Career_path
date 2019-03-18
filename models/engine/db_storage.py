@@ -33,7 +33,7 @@ class DBStorage:
             creates the engine self.__engine
         """
         self.__engine = create_engine(
-            'mysql+mysqldb://{}:{}@{}/{}'.format(
+            'mysql+mysqldb://{}:{}@{}/{}?charset=utf8mb4'.format(
                 'career_path',
                 'career_path_pwd',
                 os.environ.get('HOST'),

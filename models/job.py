@@ -26,9 +26,9 @@ class Job(BaseModel, Base):
     """Place class handles all application places"""
     __tablename__ = 'job'
     company = Column(String(60), nullable=False)
-    position = Column(String(60), nullable=False)
+    position = Column(String(120), nullable=False)
     location = Column(String(60), nullable=False)
-    description = Column(String(1000), nullable=True)
+    description = Column(String(10000), nullable=True)
     applied = Column(String(60), nullable=True)
     interview = Column(String(60), nullable=True)
     status = Column(String(60), nullable=True)
