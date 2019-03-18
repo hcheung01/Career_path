@@ -15,7 +15,7 @@ h1 {
     box-sizing: 2px !important;
 }
 
-label #remember{
+#remember{
     float: left !important;
     margin-left: 25px !important;
 }
