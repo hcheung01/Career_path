@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/custom.css') }}" />
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script>
   </head>
 
   <body class="is-preload">
@@ -18,7 +17,7 @@
         <h1><a href="{{ url_for('home') }}">Career Up</a></h1>
         <!-- <div id="api_status" style="margin-right:30px;margin-left:auto;border-radius:40px;width:40px;height:40px;background:#cccccc">
 	     </div> -->
-	<nav class="main">
+	<nav class="main sticky-top">
           <ul>
             <li class="search">
               <a class="fa-search" href="#search">Search</a>
@@ -116,6 +115,8 @@
 
       {% block content %}{% endblock %}
     </div>
+
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
@@ -123,9 +124,9 @@
     <script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script> -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3XfuMJJGzaU8TUItQM7XWD4esZdbpgtA&libraries=places"></script>
 
-<!-- Footer -->
+    <!-- Footer -->
     <footer id="footer">
       <ul class="icons">
         <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
@@ -133,7 +134,7 @@
         <li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
         <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
         <li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
-  <li><a href="https://github.com/hcheung01/Career_path" class="fa-github"><span class="label"></span></a></li>
+	<li><a href="https://github.com/hcheung01/Career_path" class="fa-github"><span class="label"></span></a></li>
       </ul>
       <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
     </footer>

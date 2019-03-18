@@ -1872,9 +1872,9 @@ input, select, textarea {
 		color: #3c3b3b !important;
 		cursor: pointer;
 		display: inline-block;
-		font-family: "Raleway", Helvetica, sans-serif;
+		font-family: "Franklin Goth", Helvetica, sans-serif;
 		font-size: 0.6em;
-		font-weight: 800;
+		font-weight: 600;
 		height: 4.8125em;
 		letter-spacing: 0.25em;
 		line-height: 4.8125em;
@@ -1883,6 +1883,7 @@ input, select, textarea {
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
+		margin-top: 5px;
 	}
 
 		input[type="submit"]:hover,
@@ -2021,11 +2022,11 @@ input, select, textarea {
 			}
 
 	label {
-		color: #3c3b3b;
+		color: #06053E;
 		display: block;
 		font-size: 0.9em;
-		font-weight: 700;
-		margin: 0 0 1em 0;
+		font-weight: 200;
+		margin-top: 10px;
 	}
 
 	input[type="text"],
@@ -2110,6 +2111,7 @@ input, select, textarea {
 		height: 2.75em;
 		padding-right: 2.75em;
 		text-overflow: ellipsis;
+		margin-top: 6px;
 	}
 
 		select option {
@@ -2429,7 +2431,7 @@ input, select, textarea {
 	ul.icons {
 		cursor: default;
 		list-style: none;
-		padding-left: 0;
+		padding-left: 24px;
 	}
 
 		ul.icons li {
@@ -3067,6 +3069,7 @@ input, select, textarea {
 
 			#header h1 a {
 				font-size: 0.7em;
+				padding-left: 14px;
 			}
 
 		#header .links {
@@ -3410,6 +3413,7 @@ input, select, textarea {
 		font-weight: 400;
 		letter-spacing: 0.25em;
 		text-transform: uppercase;
+		padding-left: 24px;
 	}
 
 	body.single #footer {
