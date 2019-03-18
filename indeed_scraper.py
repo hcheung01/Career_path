@@ -2,11 +2,7 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 import re
-from datetime import datetime, timedelta
-#from models.engine import db_storage
-#storage = db_storage.DBStorage()
-#storage.reload()
-
+from models.job_db import Job_db
 
 
 def find_keywords(description):
@@ -112,10 +108,10 @@ def get_jobs_list(total_jobs):
 
     for i in range(min_pages):
         url_list = url + str(page_ct)
-        jobs_per_link = scrape_links(url)
+        jobs_per_link = scrape_links(url_list)
         all_jobs.extend(jobs_per_link)
         page_ct += 50
-    print(job_info)
+
     for job in all_jobs:
         new_job = Job_db(
             company = job['company'],
@@ -127,8 +123,6 @@ def get_jobs_list(total_jobs):
         new_job.date_post = job['date_post']
         new_job.save()
 
-#def get_location():
-#    """get location"""
 
 if __name__ == "__main__":
     get_jobs_list(101)
