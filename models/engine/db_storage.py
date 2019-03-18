@@ -129,3 +129,7 @@ class DBStorage:
             returns the count of all objects in storage
         """
         return (len(self.all(cls)))
+
+    def drop_table(self, table_class):
+        """drop a table"""
+        table_class.__table__.drop(self.__engine)

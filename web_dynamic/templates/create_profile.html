@@ -34,31 +34,16 @@
                 </script>
             </div>
 
-	    <div class="col-12">
-	      <select name="demo-category" id="demo-category">
-		<option value="">- Skills -</option>
-		<option value="1">Python</option>
-		<option value="1">CSS</option>
-		<option value="1">Bash</option>
-		<option value="1">C</option>
+	  <div class="skill_list" id="skills">
+	      <select name="demo-category" id="demo-category" multiple>
+          {% for skill in skills %}
+		          <option value="{{ skill }}"><input type="checkbox">{{ skill }}</option>
+          {% endfor %}
+
 	      </select>
+      </div>
 
-	    <!--
-            <div class="form-group" id="skills">
-                {{ form.skills.label(class="form-control-label") }}
-                {% if form.skills.errors %}
-                {{ form.skills(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.skills.errors %}
-                  <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-                {% else %}
-                {{ form.skills(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
 
-	    -->
 
             <div class="form-group" id="more_skill">
                 {{ form.more_skill.label(class="form-control-label") }}

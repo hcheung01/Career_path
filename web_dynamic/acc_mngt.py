@@ -17,7 +17,7 @@ import json
 from hashlib import md5
 from flask_mail import Message, Mail
 from web_dynamic import app, login_manager
-
+mail = Mail(app)
 
 @app.teardown_appcontext
 def teardown_db(exception):
@@ -137,3 +137,56 @@ def update_account():
                         title='Account',
                         form=form,
                         user_id=current_user.id)
+
+def send_reset_email(user):
+    s = Serializer(app.config['SECRET_KEY'], 1800)
+    token = s.dumps({'user_id': user.id}).decode('utf-8')
+    msg = Message('Password Reset Request',
+                    sender='teamcareer.up@gmail.com',
+                    recipients=[user.email])
+    msg.body = """To reset your password, visit the following link:
+{}
+
+If you did not make this request then simply ignore this email and no changes will be made.
+""".format(url_for('reset_token', token=token, _external=True))
+    mail.send(msg)
+
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        for user in storage.all('User').values():
+            if user.email == form.email.data:
+                send_reset_email(user)
+                flash('An email has been sent with instructions to reset your password.', 'info')
+                return redirect(url_for('login'))
+    return render_template('reset_request.html',
+                            title='Reset Password',
+                            form=form)
+
+
+@app.route("/reset_password/<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    s = Serializer(app.config['SECRET_KEY'])
+    try:
+        user_id = s.loads(token)['user_id']
+    except:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('reset_request'))
+    user = storage.get('User', user_id)
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        pw = md5()
+        pw.update(form.password.data.encode("utf-8"))
+        user.password = pw.hexdigest()
+        user.save()
+        flash('Your password has been updated! You are now able to log in', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset_token.html',
+                            title='Reset Password',
+                            form=form)

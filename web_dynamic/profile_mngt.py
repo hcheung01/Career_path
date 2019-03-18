@@ -50,15 +50,43 @@ def profile():
 @login_required
 def create_profile():
     form = ProfileForm()
+    skills = ["python", "javascript", "html", "css", "ruby", "bash",
+                   "linux", "unix", "rest", "restful", "api", "aws",
+                   "cloud", "svn", "git", "junit", "testng", "java", "php",
+                   "agile", "scrum", "nosql", "mysql", "postgresdb", "postgres",
+                   "shell", "scripting", "mongodb", "puppet", "chef", "ansible",
+                   "nagios", "sumo", "nginx", "haproxy", "docker", "automation",
+                   "jvm", "scikit-learn", "tensorflow", "vue", "react", "angular",
+                   "webpack", "drupal", "gulp", "es6", "jquery", "sass", "scss",
+                   "less", "nodejs", "node.js", "graphql", "postgresql", "db2",
+                   "sql", "spring", "microservices", "kubernates", "swagger",
+                   "hadoop", "ci/cd", "django", "elasticsearch", "redis", "c++",
+                   "c", "hive", "spark", "apache", "mesos", "gcp", "jenkins",
+                   "azure", "allcloud", "amqp", "gcp", "objective-c", "kotlin"
+                   "kafka", "jira", "cassandra", "containers", "oop", "redis",
+                   "memcached", "redux", "bigquery", "bigtable", "hbase", "ec2",
+                   "s3", "gradle", ".net", "riak", "shell", "hudson", "maven",
+                   "j2ee", "oracle", "swarm", "sysbase", "dynamodb", "neo4",
+                   "allcloud", "grunt", "gulp", "apex", "rails", "mongo", "apis",
+                   "html5", "css3", "rails", "scala", "rasa", "soa", "soap",
+                   "microservices", "storm", "flink", "gitlab", "ajax",
+                   "micro-services", "oop", "saas", "struts", "jsp", "freemarker",
+                   "hibernate", "rlak", "solidity", "heroku", "ecs", "gce",
+                   "scripting", "perl", "c#", "golang", "xml", "newrelic",
+                   "grafana", "helm", "polymer", "closure", "backbone",
+                   "atlassian", "angularjs", "flask", "scikitlearn", "theano",
+                   "numpy", "scipy", "panda", "tableau", "gensim", "rpc",
+                   "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
+                   "kinesis", "lambda", "typescript", "gradle", "buck", "bazel"]
     if form.is_submitted() and form.errors == {}:
         print("check herer 2")
         profile = Profile(user_id = current_user.id,
                         position = form.position.data,
                         location = form.location.data
         )
-        for skill_id in form.skills.data:
-            skill = storage.get('Skill', skill_id)
-            profile.skills.append(skill)
+        # for skill_id in form.skills.data:
+        #     skill = storage.get('Skill', skill_id)
+        #     profile.skills.append(skill)
         if form.more_skill.data:
             skill_list = form.more_skill.data.split(',')
             for skill in skill_list:
@@ -71,6 +99,7 @@ def create_profile():
     return render_template('create_profile.html',
                             title='Profile',
                             form=form,
+                            skills=skills,
                             method='POST')
 
 @app.route('/profile_delete/<profile_id>')
@@ -101,9 +130,9 @@ def profile_update(profile_id=None):
         profile_obj.position = form.position.data
         profile_obj.location = form.location.data
         profile_obj.skills = []
-        for skill_id in form.skills.data:
-            skill = storage.get('Skill', skill_id)
-            profile_obj.skills.append(skill)
+        # for skill_id in form.skills.data:
+        #     skill = storage.get('Skill', skill_id)
+        #     profile_obj.skills.append(skill)
         if form.more_skill.data:
             skill_list = form.more_skill.data.split(',')
             for skill in skill_list:
