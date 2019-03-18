@@ -14,3 +14,8 @@ h1 {
 #btn btn-outline-secondary dropdown-toggle {
     box-sizing: 2px !important;
 }
+
+label #remember{
+    float: left !important;
+    margin-left: 25px !important;
+}
