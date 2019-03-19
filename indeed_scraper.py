@@ -4,11 +4,10 @@ from bs4 import BeautifulSoup
 import re
 from models.job_db import Job_db
 
-
+"""
 def find_keywords(description):
-    """match keywords"""
 
-    d_list = description.replace(",", " ").replace("(", " ").replace(")", " ").split()
+    d_list = description.replace(".", " ").replace(",", " ").replace("(", " ").replace(")", " ").split()
     keywords = {"python", "javascript", "html", "css", "ruby", "bash",
                 "linux", "unix", "rest", "restful", "api", "aws",
                 "cloud", "svn", "git", "junit", "testng", "java", "php",
@@ -44,7 +43,7 @@ def find_keywords(description):
     if found:
         return set(found)
     return None
-
+"""
 def scrape_job_page(url):
     """scrape the full job page"""
 
@@ -61,8 +60,8 @@ def scrape_job_page(url):
         job_info['company'] = soup.find(attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).find_all(name='div')[0].text
         description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
         job_info['description'] = description
-        all_keys = find_keywords(description)
-        job_info['skills_matched'] = (all_keys, len(all_keys))
+#        all_keys = find_keywords(description)
+#        job_info['skills_matched'] = all_keys
         location_info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).text.split('-')[1].split(' ')
         location = ' '.join([i for i in location_info if not i.isdigit()])
         job_info['location'] = location
@@ -121,6 +120,7 @@ def get_jobs_list(total_jobs):
             link = job['job_link']
         )
         new_job.date_post = job['date_post']
+ #       new_job.skills = job['skills_matched']
         new_job.save()
 
 

@@ -7,11 +7,12 @@ from flask import render_template, url_for, flash, redirect, request, Flask, jso
 from models import storage, CNC
 from models.job import Job
 from datetime import datetime
-
+import json
 
 def add_item(job, key, skill_list):
 
-    job_list_skill = job['description'].replace(".", " ").replace(",", " ").replace("(", " ").replace(")", " ").split()
+    job_list_skill = job['description'].replace(",", " ").replace("(", " ").replace(")", " ").split()
+
     keywords = {"python", "javascript", "html", "css", "ruby", "bash",
                 "linux", "unix", "rest", "restful", "api", "aws",
                 "cloud", "svn", "git", "junit", "testng", "java", "php",
@@ -41,9 +42,12 @@ def add_item(job, key, skill_list):
                 "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
                 "kinesis", "lambda", "typescript", "gradle", "buck", "bazel",
                 "ajax", "c#", "xml", "json", "xpath", "xslt", "pandas",
-                "djangoml", "scikit-learn", "heroku"}
+                "djangoml", "scikit-learn", "heroku", "automation", "scrum",
+                "sql", "testing", "debugging", "terraform", "mysqlnice",
+                "unity", "sdl", "opengl", "metal", "hlsl", "glsl", "shaderlab",
+                "rendering", "postmortem", "ci", "cd", "typescript"}
 
-    job_skills = {s.lower() for s in job_list_skill if s.lower() in keywords}
+    job_skills = {s.lower() for s in job_list_skill if s.lower() in keywords or (s.lower() + ".") in keywords}
     if "Go" in job_list_skill:
         job_skills.add("go")
 
