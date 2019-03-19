@@ -16,11 +16,7 @@
   <tr>
     <td><a href="/job_search_profile/{{ prof.id }}"</a>{{ prof.position }}</td>
     <td>{{ prof.location }}</td>
-    <td>
-    {% for skill in prof.skills %}
-      {{ skill.name }},
-    {% endfor %}
-    </td>
+    <td>{{ prof.skills }}</td>
     <td>
       <a href="/profile_update/{{ prof.id }}">Click here to Update</a>
     </td>

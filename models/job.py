@@ -34,5 +34,4 @@ class Job(BaseModel, Base):
     status = Column(String(60), nullable=True)
     note = Column(String(300), nullable=True)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-    skills = relationship('Skill', secondary="job_skill",
-                             viewonly=False)
+    skills = Column(String(500), nullable=True)
