@@ -8,16 +8,48 @@ from models import storage, CNC
 from models.job import Job
 from datetime import datetime
 
+
 def add_item(job, key, skill_list):
-    temp = job['description']
-    job_list_skill = temp.replace(',', ' ').replace('(', ' ').replace(')', ' ').lower().split()
-    list = skill_list.lower().split()
-    sub_set = set(job_list_skill).intersection(set(list))
-    print(sub_set)
-    print(skill_list)
-    m = round(len(sub_set) / len(list) * 100, 0)
-    print("m is ", m)
-    # setattr(job, key, "{0:.2f}%".format(m))
+
+    job_list_skill = job['description'].replace(".", " ").replace(",", " ").replace("(", " ").replace(")", " ").split()
+    keywords = {"python", "javascript", "html", "css", "ruby", "bash",
+                "linux", "unix", "rest", "restful", "api", "aws",
+                "cloud", "svn", "git", "junit", "testng", "java", "php",
+                "agile", "scrum", "nosql", "mysql", "postgresdb", "postgres",
+                "shell", "scripting", "mongodb", "puppet", "chef", "ansible",
+                "nagios", "sumo", "nginx", "haproxy", "docker", "automation",
+                "jvm", "scikit-learn", "tensorflow", "vue", "react", "angular",
+                "webpack", "drupal", "gulp", "es6", "jquery", "sass", "scss",
+                "less", "nodejs", "node.js", "graphql", "postgresql", "db2",
+                "sql", "spring", "microservices", "kubernates", "swagger",
+                "hadoop", "ci/cd", "django", "elasticsearch", "redis", "c++",
+                "c", "hive", "spark", "apache", "mesos", "gcp", "jenkins",
+                "azure", "allcloud", "amqp", "gcp", "objective-c", "kotlin"
+                "kafka", "jira", "cassandra", "containers", "oop", "redis",
+                "memcached", "redux", "bigquery", "bigtable", "hbase", "ec2",
+                "s3", "gradle", ".net", "riak", "shell", "hudson", "maven",
+                "j2ee", "oracle", "swarm", "sysbase", "dynamodb", "neo4",
+                "allcloud", "grunt", "gulp", "apex", "rails", "mongo", "apis",
+                "html5", "css3", "rails", "scala", "rasa", "soa", "soap",
+                "microservices", "storm", "flink", "gitlab", "ajax",
+                "micro-services", "oop", "saas", "struts", "jsp", "freemarker",
+                "hibernate", "rlak", "solidity", "heroku", "ecs", "gce",
+                "scripting", "perl", "c#", "golang", "xml", "newrelic",
+                "grafana", "helm", "polymer", "closure", "backbone",
+                "atlassian", "angularjs", "flask", "scikitlearn", "theano",
+                "numpy", "scipy", "panda", "tableau", "gensim", "rpc",
+                "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
+                "kinesis", "lambda", "typescript", "gradle", "buck", "bazel",
+                "ajax", "c#", "xml", "json", "xpath", "xslt", "pandas",
+                "djangoml", "scikit-learn", "heroku"}
+
+    job_skills = {s.lower() for s in job_list_skill if s.lower() in keywords}
+    if "Go" in job_list_skill:
+        job_skills.add("go")
+
+    user_skills = set(skill_list.lower().replace(",", " ").split())
+    match_skills = user_skills.intersection(job_skills)
+    m = round(len(match_skills) / len(job_skills) * 100, 0)
     job[key] = "{}%".format(int(m))
     return job
 
@@ -76,5 +108,4 @@ def job_search_by_profile(profile_id=None):
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
     sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
-    # print(sorted_job_list[0])
     return jsonify(sorted_job_list)
