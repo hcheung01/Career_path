@@ -4,46 +4,6 @@ from bs4 import BeautifulSoup
 import re
 from models.job_db import Job_db
 
-"""
-def find_keywords(description):
-
-    d_list = description.replace(".", " ").replace(",", " ").replace("(", " ").replace(")", " ").split()
-    keywords = {"python", "javascript", "html", "css", "ruby", "bash",
-                "linux", "unix", "rest", "restful", "api", "aws",
-                "cloud", "svn", "git", "junit", "testng", "java", "php",
-                "agile", "scrum", "nosql", "mysql", "postgresdb", "postgres",
-                "shell", "scripting", "mongodb", "puppet", "chef", "ansible",
-                "nagios", "sumo", "nginx", "haproxy", "docker", "automation",
-                "jvm", "scikit-learn", "tensorflow", "vue", "react", "angular",
-                "webpack", "drupal", "gulp", "es6", "jquery", "sass", "scss",
-                "less", "nodejs", "node.js", "graphql", "postgresql", "db2",
-                "sql", "spring", "microservices", "kubernates", "swagger",
-                "hadoop", "ci/cd", "django", "elasticsearch", "redis", "c++",
-                "c", "hive", "spark", "apache", "mesos", "gcp", "jenkins",
-                "azure", "allcloud", "amqp", "gcp", "objective-c", "kotlin"
-                "kafka", "jira", "cassandra", "containers", "oop", "redis",
-                "memcached", "redux", "bigquery", "bigtable", "hbase", "ec2",
-                "s3", "gradle", ".net", "riak", "shell", "hudson", "maven",
-                "j2ee", "oracle", "swarm", "sysbase", "dynamodb", "neo4",
-                "allcloud", "grunt", "gulp", "apex", "rails", "mongo", "apis",
-                "html5", "css3", "rails", "scala", "rasa", "soa", "soap",
-                "microservices", "storm", "flink", "gitlab", "ajax",
-                "micro-services", "oop", "saas", "struts", "jsp", "freemarker",
-                "hibernate", "rlak", "solidity", "heroku", "ecs", "gce",
-                "scripting", "perl", "c#", "golang", "xml", "newrelic",
-                "grafana", "helm", "polymer", "closure", "backbone",
-                "atlassian", "angularjs", "flask", "scikitlearn", "theano",
-                "numpy", "scipy", "panda", "tableau", "gensim", "rpc",
-                "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
-                "kinesis", "lambda", "typescript", "gradle", "buck", "bazel"}
-
-    found = [s for s in d_list if s.lower() in keywords]
-    if "Go" in d_list:
-        found.append("Go")
-    if found:
-        return set(found)
-    return None
-"""
 def scrape_job_page(url):
     """scrape the full job page"""
 
@@ -58,10 +18,9 @@ def scrape_job_page(url):
         info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer'})
         job_info['position'] = info.find(name='h3').text
         job_info['company'] = soup.find(attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).find_all(name='div')[0].text
+        #description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
         description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
         job_info['description'] = description
-#        all_keys = find_keywords(description)
-#        job_info['skills_matched'] = all_keys
         location_info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).text.split('-')[1].split(' ')
         location = ' '.join([i for i in location_info if not i.isdigit()])
         job_info['location'] = location
@@ -120,7 +79,6 @@ def get_jobs_list(total_jobs):
             link = job['job_link']
         )
         new_job.date_post = job['date_post']
- #       new_job.skills = job['skills_matched']
         new_job.save()
 
 

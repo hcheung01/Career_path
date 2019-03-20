@@ -35,3 +35,5 @@ class Job(BaseModel, Base):
     note = Column(String(300), nullable=True)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     skills = Column(String(500), nullable=True)
+#    link = Column(String(5000), nullable=False)
+#    date_post = Column(DateTime, nullable=False)

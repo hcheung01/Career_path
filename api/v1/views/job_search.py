@@ -52,8 +52,12 @@ def add_item(job, key, skill_list):
         job_skills.add("go")
 
     user_skills = set(skill_list.lower().replace(",", " ").split())
+
     match_skills = user_skills.intersection(job_skills)
-    m = round(len(match_skills) / len(job_skills) * 100, 0)
+    if len(match_skills):
+        m = round(len(match_skills) / len(job_skills) * 100, 0)
+    else:
+        m = 0
     job[key] = "{}%".format(int(m))
     return job
 
@@ -110,6 +114,7 @@ def job_search_by_profile(profile_id=None):
     if profile_obj is None:
         abort(404, 'Not found')
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
+
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
     sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
     return jsonify(sorted_job_list)
