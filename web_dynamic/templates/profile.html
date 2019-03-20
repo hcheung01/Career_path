@@ -94,7 +94,9 @@
           data: JSON.stringify(dic),
           contentType: 'application/json',
           success: function(data){
-            location.reload();
+            if (data) {
+              location.reload();
+            }
           }
         });
       }
