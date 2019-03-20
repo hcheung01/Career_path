@@ -85,10 +85,6 @@ def create_profile():
                         location = form.location.data,
                         skills = form.more_skill.data
         )
-        print(form.more_skill.data)
-        # for skill_id in form.skills.data:
-        #     skill = storage.get('Skill', skill_id)
-        #     profile.skills.append(skill)
         storage.new(profile)
         storage.save()
         flash('Your post has been created!', 'success')
@@ -127,13 +123,6 @@ def profile_update(profile_id=None):
         profile_obj.position = form.position.data
         profile_obj.location = form.location.data
         profile_obj.skills = form.more_skill.data
-        # for skill_id in form.skills.data:
-        #     skill = storage.get('Skill', skill_id)
-        #     profile_obj.skills.append(skill)
-        # if form.more_skill.data:
-        #     skill_list = form.more_skill.data
-        #     for skill in skill_list:
-        #         profile_obj.skills.append(skill)
         profile_obj.save()
         flash('Your profile has been updated!', 'success')
         return redirect(url_for('profile'))
@@ -173,9 +162,6 @@ def job_delete(job_id=None):
         abort(404)
     job_obj.delete()
     return render_template('profile.html')
-
-
-
 
 
 @app.route('/job_search_profile/<profile_id>', methods=['GET'])

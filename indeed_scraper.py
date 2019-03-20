@@ -3,10 +3,9 @@ import bs4
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime, timedelta
-from models.job_db import Job_db
-# from models.engine import db_storage
-# storage = db_storage.DBStorage()
-# storage.reload()
+# from models.job_db import Job_db
+# from models import storage
+
 
 
 def scrape_job_page(url):
@@ -63,26 +62,25 @@ def get_jobs_list(total_jobs):
     page_ct = 0
     all_jobs = []
 
-    url = "https://www.indeed.com/jobs?q=software+engineer&l=San+Francisco,+CA&limit=50&fromage=15&radius=25&start="
-
+    url = "https://www.indeed.com/jobs?q=software+engineer&limit=50&fromage=15&radius=25&start="
+    i = 0
     for i in range(min_pages):
         url_list = url + str(page_ct)
         jobs_per_link = scrape_links(url)
         all_jobs.extend(jobs_per_link)
         page_ct += 50
-    # print(all_jobs)
-    for job in all_jobs:
-        new_job = Job_db(
-            company = job['company'],
-            location = job['location'],
-            position = job['position'],
-            description = job['description'],
-            link = job['job_link']
-        )
-        new_job.date_post = job['date_post']
-        new_job.save()
+    print(all_jobs)
+    # for job in all_jobs:
+    #     new_job = Job_db(
+    #         company = str(job['company']),
+    #         location = str(job['location']),
+    #         position = str(job['position']),
+    #         description = str(job['description']),
+    #         link = str(job['job_link'])
+    #     )
+    #     new_job.date_post = int(job['date_post'])
+    #     new_job.save()
 
 if __name__ == "__main__":
 #    scrape_links("https://www.indeed.com/jobs?as_and=software+engineer&as_phr=&as_any=&as_not=&as_t#tl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=25&l=San+Francisco+Bay+Area%2C+CA&fromage=any&limit=5#0&sort=&psf=advsrch")
-
     get_jobs_list(50)
