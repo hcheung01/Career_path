@@ -6,7 +6,6 @@
     <th>Position</th>
     <th>Company</th>
     <th>Location</th>
-    <th>Level</th>
     <th>Date Post</th>
     <th>Skill Match</th>
   </tr>
@@ -15,10 +14,8 @@
     <td><a href="/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</a></td>
     <td>{{ job.company }}</td>
     <td>{{ job.location }}</td>
-    <td>{{ job.level }}</td>
     <td>{{ job.date_post }}</td>
     <td>{{ job.skill_match }}</td>
-
   </tr>
   {% endfor %}
 </table>

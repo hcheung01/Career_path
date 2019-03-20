@@ -2,7 +2,7 @@
 """
 Flask App that integrates with CareerUp static HTML Template
 """
-from flask import render_template, url_for, flash, redirect, request, Flask, jsonify, abort
+from flask import render_template, url_for, flash, redirect, request, Flask, jsonify, abort, Markup
 from models import storage
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import requests
@@ -170,4 +170,4 @@ def job_add(user_id=None, job_db_id=None):
     )
     storage.new(new_job)
     storage.save()
-    return render_template('job_detail.html', job_db_obj=job_db_obj)
+    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=Markup(job_db_obj.html_description))
