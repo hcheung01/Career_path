@@ -2,15 +2,11 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 import re
-<<<<<<< HEAD
 from datetime import datetime, timedelta
-# from models.job_db import Job_db
-# from models import storage
-
-
-=======
 from models.job_db import Job_db
->>>>>>> dcb57069b5f36b824a87fd35d5250438907bb956
+from models import storage
+
+
 
 def scrape_job_page(url):
     """scrape the full job page"""
