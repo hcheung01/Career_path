@@ -2,12 +2,11 @@
 """
 Flask App that integrates with CareerUp static HTML Template
 """
-from flask import render_template, url_for, flash, redirect, request, Flask, jsonify, abort
+from flask import render_template, url_for, flash, redirect, request, Flask, jsonify, abort, Markup
 from models import storage
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import requests
 from .forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, ProfileForm
-# from .forms import PostForm, ReviewForm
 from models.user import User
 from models.profile import Profile
 from models.job import Job
@@ -18,6 +17,8 @@ import json
 from hashlib import md5
 from flask_mail import Message, Mail
 from web_dynamic import app, login_manager
+
+from datetime import datetime, timedelta
 
 
 @app.teardown_appcontext
@@ -49,35 +50,8 @@ def profile():
 @app.route("/profile/new",  methods=['GET', 'POST'])
 @login_required
 def create_profile():
+
     form = ProfileForm()
-    skills = ["python", "javascript", "html", "css", "ruby", "bash",
-                   "linux", "unix", "rest", "restful", "api", "aws",
-                   "cloud", "svn", "git", "junit", "testng", "java", "php",
-                   "agile", "scrum", "nosql", "mysql", "postgresdb", "postgres",
-                   "shell", "scripting", "mongodb", "puppet", "chef", "ansible",
-                   "nagios", "sumo", "nginx", "haproxy", "docker", "automation",
-                   "jvm", "scikit-learn", "tensorflow", "vue", "react", "angular",
-                   "webpack", "drupal", "gulp", "es6", "jquery", "sass", "scss",
-                   "less", "nodejs", "node.js", "graphql", "postgresql", "db2",
-                   "sql", "spring", "microservices", "kubernates", "swagger",
-                   "hadoop", "ci/cd", "django", "elasticsearch", "redis", "c++",
-                   "c", "hive", "spark", "apache", "mesos", "gcp", "jenkins",
-                   "azure", "allcloud", "amqp", "gcp", "objective-c", "kotlin"
-                   "kafka", "jira", "cassandra", "containers", "oop", "redis",
-                   "memcached", "redux", "bigquery", "bigtable", "hbase", "ec2",
-                   "s3", "gradle", ".net", "riak", "shell", "hudson", "maven",
-                   "j2ee", "oracle", "swarm", "sysbase", "dynamodb", "neo4",
-                   "allcloud", "grunt", "gulp", "apex", "rails", "mongo", "apis",
-                   "html5", "css3", "rails", "scala", "rasa", "soa", "soap",
-                   "microservices", "storm", "flink", "gitlab", "ajax",
-                   "micro-services", "oop", "saas", "struts", "jsp", "freemarker",
-                   "hibernate", "rlak", "solidity", "heroku", "ecs", "gce",
-                   "scripting", "perl", "c#", "golang", "xml", "newrelic",
-                   "grafana", "helm", "polymer", "closure", "backbone",
-                   "atlassian", "angularjs", "flask", "scikitlearn", "theano",
-                   "numpy", "scipy", "panda", "tableau", "gensim", "rpc",
-                   "graphql", "iaas", "paas", "azure", "es", "solr", "http", "iot",
-                   "kinesis", "lambda", "typescript", "gradle", "buck", "bazel"]
     if form.is_submitted() and form.errors == {}:
         print("check herer 2")
         profile = Profile(user_id = current_user.id,
@@ -85,6 +59,7 @@ def create_profile():
                         location = form.location.data,
                         skills = form.more_skill.data
         )
+        print(form.more_skill.data)
         storage.new(profile)
         storage.save()
         flash('Your post has been created!', 'success')
@@ -92,7 +67,6 @@ def create_profile():
     return render_template('create_profile.html',
                             title='Profile',
                             form=form,
-                            skills=skills,
                             method='POST')
 
 @app.route('/profile_delete/<profile_id>')
@@ -178,13 +152,19 @@ def job_add(user_id=None, job_db_id=None):
     job_db_obj = storage.get('Job_db', job_db_id)
     if job_db_obj is None:
         abort(404, 'Not found')
+    d = datetime.today() - timedelta(days=job_db_obj.date_post)
+    print(d)
     new_job = Job(
         company = job_db_obj.company,
         position = job_db_obj.position,
         location = job_db_obj.location,
         description = job_db_obj.description,
-        user_id = user_id
+        user_id = user_id,
+
+        html_description = job_db_obj.html_description
+#        link = job_db_obj.link,
+#        date_post = d
     )
     storage.new(new_job)
     storage.save()
-    return render_template('job_detail.html', job_db_obj=job_db_obj)
+    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=Markup(job_db_obj.html_description))

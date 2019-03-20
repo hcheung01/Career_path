@@ -2,14 +2,19 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 import re
+<<<<<<< HEAD
 from datetime import datetime, timedelta
 # from models.job_db import Job_db
 # from models import storage
 
 
+=======
+from models.job_db import Job_db
+>>>>>>> dcb57069b5f36b824a87fd35d5250438907bb956
 
 def scrape_job_page(url):
-    """script all info in page indeed"""
+    """scrape the full job page"""
+
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
     job_info = {}
@@ -19,10 +24,13 @@ def scrape_job_page(url):
 
     try:
         info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer'})
-        if info:
-            job_info['position'] = info.find(name='h3').text
-            job_info['company'] = soup.find(attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).find_all(name='div')[0].text
-            job_info['description'] = soup.get_text()
+        job_info['position'] = info.find(name='h3').text
+        job_info['company'] = soup.find(attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).find_all(name='div')[0].text
+
+        html_description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'})
+        job_info['html_description'] = html_description
+        description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
+        job_info['description'] = description
         location_info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).text.split('-')[1].split(' ')
         location = ' '.join([i for i in location_info if not i.isdigit()])
         job_info['location'] = location
@@ -39,7 +47,8 @@ def scrape_job_page(url):
     return None
 
 def scrape_links(url):
-    """"""
+    """Get all links from listing page"""
+
     jobs_page = requests.get(url)
     soups = BeautifulSoup(jobs_page.text, "html.parser")
 
@@ -57,7 +66,8 @@ def scrape_links(url):
     return all_job_list
 
 def get_jobs_list(total_jobs):
-    """go to next page"""
+    """get total jobs"""
+
     min_pages = total_jobs // 50
     page_ct = 0
     all_jobs = []
@@ -66,21 +76,24 @@ def get_jobs_list(total_jobs):
     i = 0
     for i in range(min_pages):
         url_list = url + str(page_ct)
-        jobs_per_link = scrape_links(url)
+        jobs_per_link = scrape_links(url_list)
         all_jobs.extend(jobs_per_link)
         page_ct += 50
-    print(all_jobs)
-    # for job in all_jobs:
-    #     new_job = Job_db(
-    #         company = str(job['company']),
-    #         location = str(job['location']),
-    #         position = str(job['position']),
-    #         description = str(job['description']),
-    #         link = str(job['job_link'])
-    #     )
-    #     new_job.date_post = int(job['date_post'])
-    #     new_job.save()
+
+    for job in all_jobs:
+        new_job = Job_db(
+            company = job['company'],
+            location = job['location'],
+            position = job['position'],
+            description = job['description'],
+            link = job['job_link'],
+
+            html_description = job['html_description']
+
+        )
+        new_job.date_post = job['date_post']
+        new_job.save()
+
 
 if __name__ == "__main__":
-#    scrape_links("https://www.indeed.com/jobs?as_and=software+engineer&as_phr=&as_any=&as_not=&as_t#tl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=25&l=San+Francisco+Bay+Area%2C+CA&fromage=any&limit=5#0&sort=&psf=advsrch")
-    get_jobs_list(50)
+    get_jobs_list(101)

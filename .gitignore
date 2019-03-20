@@ -4,3 +4,4 @@ __pycache__/*
 set_credent
 virtualenv_setup
 env/
+.DS_Store

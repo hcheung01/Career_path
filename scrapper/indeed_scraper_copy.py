@@ -113,9 +113,5 @@ def get_jobs_list(total_jobs):
         all_jobs.extend(jobs_per_link)
         page_ct += 50
 
-def get_location():
-    """get location"""
-    
-
 if __name__ == "__main__":
     get_jobs_list(101)

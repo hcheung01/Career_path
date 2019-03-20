@@ -7,7 +7,6 @@
     <th>Company</th>
     <th>Location</th>
     <th>Date Post</th>
-    <th>Skill(s)</th>
   </tr>
   {% for job in jobs %}
   <tr>
@@ -20,13 +19,6 @@
     <td>{{ job.company }}</td>
     <td>{{ job.location }}</td>
     <td>{{ job.date_post }} day(s) ago</td>
-    <td>
-    {% if job.skills %}
-      {% for skill in job.skills %}
-        {{ skill }},
-      {% endfor %}
-    {% endif %}
-    </td>
   </tr>
   {% endfor %}
 </table>
