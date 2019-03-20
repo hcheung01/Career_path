@@ -11,12 +11,11 @@ h1 {
     padding: 0;
 }
 
-
-#drop-skills:hover + #skills {
-    color: pink !important;
-    dispplay: block !important;
+#btn btn-outline-secondary dropdown-toggle {
+    box-sizing: 2px !important;
 }
 
-#skills {
-    display: none !important;
+#remember{
+    float: left !important;
+    margin-left: 25px !important;
 }

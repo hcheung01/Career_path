@@ -15,5 +15,5 @@ class Job_db(BaseModel, Base):
     location = Column(String(60), nullable=False)
     position = Column(String(120), nullable=False)
     description = Column(String(10000), nullable=False)
-    link = Column(String(1000), nullable=False)
+    link = Column(String(5000), nullable=False)
     date_post = Column(Integer, nullable=False)

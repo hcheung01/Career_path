@@ -34,14 +34,14 @@
               </div>
               <div class="form-check">
                   {{ form.remember(class="form-check-input") }}
-                  {{ form.remember.label(class="form-check-label") }}
+                  {{ form.remember.label(class="form-check-label" id="remember") }}
               </div>
           </fieldset>
           <div class="form-group">
               {{ form.submit(class="btn btn-outline-info") }}
           </div>
           <small class="text-muted ml-2">
-              <a href="{{ url_for('home') }}">Forgot Password?</a>
+              <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
           </small>
       </form>
   </div>

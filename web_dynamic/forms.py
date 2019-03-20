@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectMultipleField, widgets
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectMultipleField, widgets, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from wtforms.fields import FormField
 from models import storage
@@ -9,13 +9,13 @@ from flask_login import current_user
 
 
 class RegistrationForm(FlaskForm):
-    first_name = StringField('first_name',
+    first_name = StringField('First Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    last_name = StringField('last_name',
+    last_name = StringField('Last Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField('email',
+    email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    phone = StringField('phone')
+    phone = StringField('Phone')
     password = PasswordField('Password', validators=[DataRequired()])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
@@ -35,20 +35,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
-# class ReviewForm(FlaskForm):
-#     text = StringField('text',
-#                            validators=[DataRequired(), Length(min=1, max=100)])
-#     submit = SubmitField('Submit')
-
-
 
 class UpdateAccountForm(FlaskForm):
-    first_name = StringField('first_name',
+    first_name = StringField('First Name',
                            validators=[Length(min=2, max=20)])
-    last_name = StringField('last_name',
+    last_name = StringField('Last Name',
                             validators=[Length(min=2, max=20)])
     email = StringField('Email', validators=[Email()])
-    phone = StringField('Phone_number')
+    phone = StringField('Phone Number')
     submit = SubmitField('Update')
     def validate_email(self, email):
         all_users = storage.all('User').values()
@@ -58,14 +52,15 @@ class UpdateAccountForm(FlaskForm):
 
 
 class ProfileForm(FlaskForm):
-    position = StringField('position', validators=[DataRequired(), Length(min=2, max=20)])
-    location = StringField('location')
-    all_skills = storage.all('Skill').values()
-    skills = SelectMultipleField('skills',
-                                    choices = [(skill.id, skill.name) for skill in all_skills],
-                                    widget=widgets.ListWidget(prefix_label=True),
-                                    option_widget=widgets.CheckboxInput())
-    more_skill = StringField('more_skill')
+    position = StringField('Position', validators=[DataRequired(), Length(min=2, max=20)])
+    location = StringField('Location')
+    # all_skills = storage.all('Skill').values()
+    # skills = SelectMultipleField('skills',
+    #                                 choices = [(skill.id, skill.name) for skill in all_skills],
+    #                                 widget=widgets.ListWidget(prefix_label=True),
+    #                                 option_widget=widgets.CheckboxInput())
+    # skills = SelectField('skills')
+    more_skill = StringField('Add more skills')
     submit = SubmitField('Post')
 
 class RequestResetForm(FlaskForm):

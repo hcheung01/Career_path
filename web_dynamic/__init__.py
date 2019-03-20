@@ -12,10 +12,10 @@ login_manager.login_message_category = 'info'
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'careerpath.online'
-app.config['MAIL_PASSWORD'] = 'career_path_pw'
+app.config['MAIL_USERNAME'] = 'teamcareer.up'
+app.config['MAIL_PASSWORD'] = 'Dreamteam@hbtn'
 app.url_map.strict_slashes = False
-mail = Mail(app)
+
 
 @login_manager.user_loader
 def load_user(user_id):

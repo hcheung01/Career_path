@@ -1,34 +1,38 @@
-Career Up -  smoothing the path toward career fulfillment.
+Career Path - Smoothing the path toward career fulfillment.
 
 ## Description
-Career Up is a web-application and an all-in-one, personally tailored job search tool. This project was created to serve as the end-of-year Project at Holberton School.
 
-## Mission
-To help upcoming Software Engineers have jobs that are the right fit for them.
+This project was created to serve as the end-of-year Project at Holberton School.
 
-## Positioning Statement
-For fresh out of Software Engineering schools scholars seeking their first job, CareerUp is a web application that links new talent to individually tailored career opportunities. Unlike other similar tools, our product stands out by also suggesting ways the user can level up their skills to the job they want.  
+Career Path is a web application designed for upcoming Software Engineers looking for entry-level position. The search is done by location and job position, and it also returns how many skills from the user's profile matches with the results.
 
-### Requirements
-
-Higher Level Project:
- * At least one high level language: Python, Javascript, Go, PHP, Ruby, Objective-C, Swift, etc.
- * You are allow to use third party services
- * User authentication (Github, Twitter, Facebook…)
- * Retrieve data (Google API, Yelp API, Twitter API…)
- * Store data in database: MySQL or NoSQL (MongoDB)
-
-Examples:
- * Web application
- * Mobile application
- * IoT application
- * Machine learning application
+[Webpage](http://careerpath.website/)
+[Twitter](https://twitter.com/TeamCareerPath)
 
 ---
-File|Task
----|---
-AUTHORS | the authors page
-README.md | read me file
+
+### Contents
+
+* [Description](https://github.com/hcheung01/Career_path#description)
+* [Files in This Repository](https://github.com/hcheung01/Career_path#files-in-this-repository)
+* [Technologies](https://github.com/hcheung01/Career_path#technologies-used)
+* [Authors](https://github.com/hcheung01/Career_path#authors)
+
+---
+
+## Environment
+* __OS:__ Ubuntu 16.04 LTS
+* __languages:__ Python 3.4.3, HTML5, CSS
+* __web server:__ nginx/1.10.3
+* __application server:__ Flask 1.0.2, Jinja2 2..10
+* __database:__ MySQL
+* __web server gateway:__ gunicorn 19.9.0
+* __style:__
+  * __python:__ PEP8 1.7.0
+  * __web static:__ [W3C Validator](https://validator.w3.org/)
+  * __javascript:__ Semistandard 13.0.1
+
+---
 
 ### Authors
 
@@ -37,3 +41,7 @@ README.md | read me file
 [Leine Valente](https://github.com/leinefran)
 
 [Heindrick Cheung](https://github.com/hcheung01)
+
+---
+## License
+GNU GENERAL PUBLIC LICENSE
