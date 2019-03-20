@@ -18,7 +18,9 @@ def scrape_job_page(url):
         info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer'})
         job_info['position'] = info.find(name='h3').text
         job_info['company'] = soup.find(attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).find_all(name='div')[0].text
-        #description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
+
+        html_description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'})
+        job_info['html_description'] = html_description
         description = soup.find(attrs={'class': 'jobsearch-JobComponent-description'}).get_text()
         job_info['description'] = description
         location_info = soup.find(name='div', attrs={'class': 'jobsearch-DesktopStickyContainer-companyrating'}).text.split('-')[1].split(' ')
@@ -76,7 +78,10 @@ def get_jobs_list(total_jobs):
             location = job['location'],
             position = job['position'],
             description = job['description'],
-            link = job['job_link']
+            link = job['job_link'],
+
+            html_description = job['html_description']
+
         )
         new_job.date_post = job['date_post']
         new_job.save()

@@ -17,7 +17,8 @@ import json
 from hashlib import md5
 from flask_mail import Message, Mail
 from web_dynamic import app, login_manager
-#from datetime import datetime, timedelta
+
+from datetime import datetime, timedelta
 
 
 @app.teardown_appcontext
@@ -154,14 +155,16 @@ def job_add(user_id=None, job_db_id=None):
     job_db_obj = storage.get('Job_db', job_db_id)
     if job_db_obj is None:
         abort(404, 'Not found')
-#    d = datetime.today() - timedelta(days=job_db_obj.date_post)
-
+    d = datetime.today() - timedelta(days=job_db_obj.date_post)
+    print(d)
     new_job = Job(
         company = job_db_obj.company,
         position = job_db_obj.position,
         location = job_db_obj.location,
         description = job_db_obj.description,
         user_id = user_id,
+
+        html_description = job_db_obj.html_description
 #        link = job_db_obj.link,
 #        date_post = d
     )

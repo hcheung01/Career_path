@@ -11,6 +11,7 @@ import json
 
 def add_item(job, key, skill_list):
 
+    print(job['html_description'])
     job_list_skill = job['description'].replace(",", " ").replace("(", " ").replace(")", " ").split()
 
     keywords = {"python", "javascript", "html", "css", "ruby", "bash",

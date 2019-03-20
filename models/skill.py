@@ -11,6 +11,3 @@ class Skill(BaseModel, Base):
     """Skill class handles all application amenities"""
     __tablename__ = 'skills'
     name = Column(String(128), nullable=False)
-    # profile_skills = relationship('ProfileSkill',
-                                   # backref='skills',
-                                   # cascade='delete')
