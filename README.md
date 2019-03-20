@@ -6,8 +6,8 @@ This project was created to serve as the end-of-year Project at Holberton School
 
 Career Path is a web application designed for upcoming Software Engineers looking for entry-level position. The search is done by location and job position, and it also returns how many skills from the user's profile matches with the results.
 
-[Webpage](http://careerpath.website/)
-[Twitter](https://twitter.com/TeamCareerPath)
+* [Webpage](http://careerpath.website/)
+* [Twitter](https://twitter.com/TeamCareerPath)
 
 ---
 
