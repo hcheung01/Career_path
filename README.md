@@ -14,10 +14,9 @@ Career Path is a web application designed for upcoming Software Engineers lookin
 ### Contents
 
 * [Description](https://github.com/hcheung01/Career_path#description)
-* [Files in This Repository](https://github.com/hcheung01/Career_path#files-in-this-repository)
-* [Technologies](https://github.com/hcheung01/Career_path#technologies-used)
+* [Environment](https://github.com/hcheung01/Career_path#environment)
 * [Authors](https://github.com/hcheung01/Career_path#authors)
-
+* [License](https://github.com/hcheung01/Career_path#license)
 ---
 
 ## Environment
