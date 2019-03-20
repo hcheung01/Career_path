@@ -8,12 +8,18 @@ from models import storage, CNC
 from models.job import Job
 from datetime import datetime
 
-def add_item(dic, key, skill_list):
-    if hasattr(dic, 'skills'):
-        sub_set = set(dic['skills']).intersection(set([skill.name for skill in skill_list]))
-        m = len(sub_set) / len(skill_list)
-        dic[key] = "{0:.2f}%".format(m)
-    return dic
+def add_item(job, key, skill_list):
+    temp = job['description']
+    job_list_skill = temp.replace(',', ' ').replace('(', ' ').replace(')', ' ').lower().split()
+    list = skill_list.lower().split()
+    sub_set = set(job_list_skill).intersection(set(list))
+    print(sub_set)
+    print(skill_list)
+    m = round(len(sub_set) / len(list) * 100, 0)
+    print("m is ", m)
+    # setattr(job, key, "{0:.2f}%".format(m))
+    job[key] = "{}%".format(int(m))
+    return job
 
 def relative_compare(user_info, job_req):
     """Function to compare 2 list, if matching greater than 30% return true"""
@@ -70,4 +76,5 @@ def job_search_by_profile(profile_id=None):
     job_list = [job.to_json() for job in storage.all('Job_db').values()]
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
     sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
+    # print(sorted_job_list[0])
     return jsonify(sorted_job_list)

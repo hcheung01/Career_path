@@ -82,16 +82,13 @@ def create_profile():
         print("check herer 2")
         profile = Profile(user_id = current_user.id,
                         position = form.position.data,
-                        location = form.location.data
+                        location = form.location.data,
+                        skills = form.more_skill.data
         )
+        print(form.more_skill.data)
         # for skill_id in form.skills.data:
         #     skill = storage.get('Skill', skill_id)
         #     profile.skills.append(skill)
-        if form.more_skill.data:
-            skill_list = form.more_skill.data.split(',')
-            for skill in skill_list:
-                skill_obj = Skill(name=skill)
-                profile.skills.append(skill_obj)
         storage.new(profile)
         storage.save()
         flash('Your post has been created!', 'success')
@@ -129,14 +126,14 @@ def profile_update(profile_id=None):
     if form.is_submitted() and form.errors == {}:
         profile_obj.position = form.position.data
         profile_obj.location = form.location.data
-        profile_obj.skills = []
+        profile_obj.skills = form.more_skill.data
         # for skill_id in form.skills.data:
         #     skill = storage.get('Skill', skill_id)
         #     profile_obj.skills.append(skill)
-        if form.more_skill.data:
-            skill_list = form.more_skill.data.split(',')
-            for skill in skill_list:
-                profile_obj.skills.append(skill)
+        # if form.more_skill.data:
+        #     skill_list = form.more_skill.data
+        #     for skill in skill_list:
+        #         profile_obj.skills.append(skill)
         profile_obj.save()
         flash('Your profile has been updated!', 'success')
         return redirect(url_for('profile'))

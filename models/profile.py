@@ -28,6 +28,4 @@ class Profile(BaseModel, Base):
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     position = Column(String(128), nullable=False)
     location = Column(String(1024), nullable=True)
-
-    skills = relationship('Skill', secondary="profile_skill",
-                             viewonly=False)
+    skills = Column(String(500), nullable=True)
