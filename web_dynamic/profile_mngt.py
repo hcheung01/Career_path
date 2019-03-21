@@ -53,13 +53,11 @@ def create_profile():
 
     form = ProfileForm()
     if form.is_submitted() and form.errors == {}:
-        print("check herer 2")
         profile = Profile(user_id = current_user.id,
                         position = form.position.data,
                         location = form.location.data,
                         skills = form.more_skill.data
         )
-        print(form.more_skill.data)
         storage.new(profile)
         storage.save()
         flash('Your post has been created!', 'success')
@@ -111,21 +109,12 @@ def profile_update(profile_id=None):
 @app.route('/job_update/<job_id>', methods=['GET', 'PUT'])
 @login_required
 def job_update(job_id=None):
-    job_obj = storage.get('Job', job_id)
-    if job_obj is None:
-        abort(404)
     if request.method == 'PUT':
         req_json = request.get_json()
-        if req_json is None:
-            abort(400, 'Not a JSON')
-        if 'applied' in req_json.keys():
-            if req_json['applied'] == '':
-                del req_json['applied']
-        if 'interview' in req_json.keys():
-            if req_json['interview'] == '':
-                del req_json['interview']
-        print(req_json)
-        job_obj.bm_update(req_json)
+        r = requests.put('http://0.0.0.0:5001/api/v1/job_update_api/' + job_id, json=req_json)
+        if r.status_code != 200:
+            abort(404)
+    print("check here bfore return home page")
     return render_template('profile.html')
 
 
@@ -147,23 +136,22 @@ def job_search_profile(profile_id):
                             jobs=jobs.json(),
                             user_id=current_user.id)
 
-@app.route('/job_add/<user_id>/<job_db_id>', methods=['GET', 'POST'])
-@login_required
+
+@app.route('/job_add/<job_db_id>/<user_id>', methods=['GET', 'POST'])
 def job_add(user_id=None, job_db_id=None):
     job_db_obj = storage.get('Job_db', job_db_id)
     if job_db_obj is None:
         abort(404, 'Not found')
     d = datetime.today() - timedelta(days=job_db_obj.date_post)
-
-    new_job = Job(
-        company = job_db_obj.company,
-        position = job_db_obj.position,
-        location = job_db_obj.location,
-        description = job_db_obj.description,
-        user_id = user_id,
-        html_description = job_db_obj.html_description
-    )
-    storage.new(new_job)
-    storage.save()
-    description = Markup(job_db_obj.html_description)
-    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=description)
+    if user_id != 'None' or user_id is None:
+        new_job = Job(
+            company = job_db_obj.company,
+            position = job_db_obj.position,
+            location = job_db_obj.location,
+            description = job_db_obj.description,
+            user_id = user_id,
+            html_description = job_db_obj.html_description
+        )
+        storage.new(new_job)
+        storage.save()
+    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=Markup(job_db_obj.html_description))

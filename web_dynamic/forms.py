@@ -55,7 +55,7 @@ class ProfileForm(FlaskForm):
     position = StringField('Position', validators=[DataRequired(), Length(min=2, max=20)])
     location = StringField('Location')
     more_skill = StringField('Add more skills')
-    submit = SubmitField('Post')
+    submit = SubmitField('Submit')
 
 class RequestResetForm(FlaskForm):
     email = StringField('Email',

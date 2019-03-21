@@ -2,7 +2,11 @@ import requests
 import bs4
 from bs4 import BeautifulSoup
 import re
+from datetime import datetime, timedelta
 from models.job_db import Job_db
+from models import storage
+
+
 
 def scrape_job_page(url):
     """scrape the full job page"""
@@ -66,6 +70,7 @@ def get_jobs_list(total_jobs):
 
     url = "https://www.indeed.com/jobs?as_and=&as_phr=&as_any=software+engineer+web+developer+intern&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=100&l=San+Francisco+Bay+Area%2C+CA&fromage=15&limit=50&sort=&psf=advsrch&start="
 
+    i = 0
     for i in range(min_pages):
         page_ct += 50
         url_list = url + str(page_ct)

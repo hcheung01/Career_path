@@ -17,7 +17,7 @@
             <section>
             <h3>preferences</h3>
                 <div class="col-6 col-12-xsmall">
-                  <input type="text" id="location_box"/>
+                  <input type="text" id="location_box" placeholder="Location"/>
                 </div>
                 <script>
                   let input = document.getElementById('location_box');
@@ -44,7 +44,6 @@
                       position = position.split(' ').join('_');
                     }
                     let url = '/job_search/' + position + '/' + location;
-                    // let url = 'http://0.0.0.0:5000/job_search/' + position + '/' + location;
                     window.location.href=url;
                   };
                 </script>
@@ -63,30 +62,17 @@
                 <tbody>
                   {% for job in jobs %}
                   <tr>
-                    <td>{{ job.company }}</td>
+                    <td><a href="/job_add/{{ job.id }}/None">{{ job.company }}</td>
                     <td>{{ job.position }}</td>
                     <td>{{ job.location }}</td>
                     <td>{{ job.date_post }} day(s) ago</td>
                   </tr>
                   {% endfor %}
                 </tbody>
-                <!-- <tfoot>
-                  <tr>
-                    <td colspan="2"></td>
-                    <td>5 results</td>
-                  </tr>
-                </tfoot> -->
               </table>
             </div>
             </section>
-
           </article>
-
-        <!-- Pagination -->
-          <!-- <ul class="actions pagination">
-            <li><a href="" class="disabled button large previous">Previous Page</a></li>
-            <li><a href="#" class="button large next">Next Page</a></li>
-          </ul> -->
 
       </div>
 
@@ -95,7 +81,7 @@
 
         <!-- Intro -->
           <section id="intro">
-            <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="" /></a>
+            <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a>
             <header>
               <h2>Career Path</h2>
 	      <p>All-in-one, personally tailored job search tool.</p>

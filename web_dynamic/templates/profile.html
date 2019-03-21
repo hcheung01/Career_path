@@ -87,15 +87,14 @@
         if ('{{ job.applied }}'.length < 6) {
           dic['applied'] = document.getElementById("{{ job.id }}apply").value
         }
+        // console.log(dic);
         $.ajax({
           url: 'http://0.0.0.0:5000/job_update/{{ job.id }}',
           type: 'put',
           dataType: 'json',
           data: JSON.stringify(dic),
           contentType: 'application/json',
-          success: function(data){
-            location.reload();
-          }
+          success: function(data){}
         });
       }
       function delFunc() {
@@ -104,7 +103,7 @@
           type: 'get',
           success: function(data){
             if (data) {
-              location.reload();
+              window.location.reload();
             }
           }
         });

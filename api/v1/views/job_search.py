@@ -103,7 +103,7 @@ def job_search_by_criteria(position=None, location=None):
             location = " ".join(location.split('_'))
             filter_list = [job for job in job_list if (relative_compare(location, job['location']))]
         sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
-    return jsonify(sorted_job_list)
+    return jsonify(sorted_job_list), 200
 
 @app_views.route('/job_search_by_profile/<profile_id>', methods=['GET'])
 def job_search_by_profile(profile_id=None):
@@ -117,4 +117,22 @@ def job_search_by_profile(profile_id=None):
 
     filter_list = [add_item(job, 'skill_match', profile_obj.skills) for job in job_list if (relative_compare(profile_obj.position, job['position'])  and relative_compare(profile_obj.location, job['location']))]
     sorted_job_list = sorted(filter_list, key=lambda k: k['date_post'])
-    return jsonify(sorted_job_list)
+    return jsonify(sorted_job_list), 200
+
+@app_views.route('/job_update_api/<job_id>', methods=['PUT'])
+def job_update_api(job_id=None):
+    job_obj = storage.get('Job', job_id)
+    if job_obj is None:
+        abort(404)
+    if request.method == 'PUT':
+        req_json = request.get_json()
+        if req_json is None:
+            abort(400, 'Not a JSON')
+        if 'applied' in req_json.keys():
+            if req_json['applied'] == '':
+                del req_json['applied']
+        if 'interview' in req_json.keys():
+            if req_json['interview'] == '':
+                del req_json['interview']
+        job_obj.bm_update(req_json)
+        return "OK", 200
