@@ -17,7 +17,7 @@
             <section>
             <h3>preferences</h3>
                 <div class="col-6 col-12-xsmall">
-                  <input type="text" id="location_box"/>
+                  <input type="text" id="location_box" placeholder="Location"/>
                 </div>
                 <script>
                   let input = document.getElementById('location_box');
@@ -62,7 +62,7 @@
                 <tbody>
                   {% for job in jobs %}
                   <tr>
-                    <td>{{ job.company }}</td>
+                    <td><a href="/job_add/{{ job.id }}/None">{{ job.company }}</td>
                     <td>{{ job.position }}</td>
                     <td>{{ job.location }}</td>
                     <td>{{ job.date_post }} day(s) ago</td>

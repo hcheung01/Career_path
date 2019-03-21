@@ -11,7 +11,7 @@
   </tr>
   {% for job in jobs %}
   <tr>
-    <td><a href="/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</a></td>
+    <td><a href="/job_add/{{ job.id }}/{{ user_id }}">{{ job.position }}</a></td>
     <td>{{ job.company }}</td>
     <td>{{ job.location }}</td>
     <td>{{ job.date_post }}</td>
