@@ -9,7 +9,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey,\
 from sqlalchemy.orm import backref
 
 class ProfileSkill(Base):
-    """ PlaceAmenity Class """
+    """profile skill class"""
     __tablename__ = 'profile_skill'
     metadata = Base.metadata
     profile_id = Column(String(60),
