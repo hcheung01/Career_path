@@ -109,21 +109,12 @@ def profile_update(profile_id=None):
 @app.route('/job_update/<job_id>', methods=['GET', 'PUT'])
 @login_required
 def job_update(job_id=None):
-    job_obj = storage.get('Job', job_id)
-    if job_obj is None:
-        abort(404)
     if request.method == 'PUT':
         req_json = request.get_json()
-        if req_json is None:
-            abort(400, 'Not a JSON')
-        if 'applied' in req_json.keys():
-            if req_json['applied'] == '':
-                del req_json['applied']
-        if 'interview' in req_json.keys():
-            if req_json['interview'] == '':
-                del req_json['interview']
-        job_obj.bm_update(req_json)
-        return redirect(url_for('profile'))
+        r = requests.put('http://0.0.0.0:5001/api/v1/job_update_api/' + job_id, json=req_json)
+        if r.status_code != 200:
+            abort(404)
+    print("check here bfore return home page")
     return render_template('profile.html')
 
 @app.route('/job_delete/<job_id>', methods=['GET', 'PUT'])
