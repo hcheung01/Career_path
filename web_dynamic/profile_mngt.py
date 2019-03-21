@@ -128,6 +128,7 @@ def job_update(job_id=None):
         job_obj.bm_update(req_json)
     return render_template('profile.html')
 
+
 @app.route('/job_delete/<job_id>', methods=['GET', 'PUT'])
 @login_required
 def job_delete(job_id=None):
@@ -136,9 +137,6 @@ def job_delete(job_id=None):
         abort(404)
     job_obj.delete()
     return render_template('profile.html')
-
-
-
 
 
 @app.route('/job_search_profile/<profile_id>', methods=['GET'])
@@ -156,18 +154,16 @@ def job_add(user_id=None, job_db_id=None):
     if job_db_obj is None:
         abort(404, 'Not found')
     d = datetime.today() - timedelta(days=job_db_obj.date_post)
-    print(d)
+
     new_job = Job(
         company = job_db_obj.company,
         position = job_db_obj.position,
         location = job_db_obj.location,
         description = job_db_obj.description,
         user_id = user_id,
-
         html_description = job_db_obj.html_description
-#        link = job_db_obj.link,
-#        date_post = d
     )
     storage.new(new_job)
     storage.save()
-    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=Markup(job_db_obj.html_description))
+    description = Markup(job_db_obj.html_description)
+    return render_template('job_detail.html', job_db_obj=job_db_obj, descrip=description)

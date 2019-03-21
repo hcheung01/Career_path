@@ -54,12 +54,6 @@ class UpdateAccountForm(FlaskForm):
 class ProfileForm(FlaskForm):
     position = StringField('Position', validators=[DataRequired(), Length(min=2, max=20)])
     location = StringField('Location')
-    # all_skills = storage.all('Skill').values()
-    # skills = SelectMultipleField('skills',
-    #                                 choices = [(skill.id, skill.name) for skill in all_skills],
-    #                                 widget=widgets.ListWidget(prefix_label=True),
-    #                                 option_widget=widgets.CheckboxInput())
-    # skills = SelectField('skills')
     more_skill = StringField('Add more skills')
     submit = SubmitField('Post')
 

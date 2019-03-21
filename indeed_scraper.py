@@ -64,13 +64,13 @@ def get_jobs_list(total_jobs):
     page_ct = 0
     all_jobs = []
 
-    url = "https://www.indeed.com/jobs?q=software+engineer&l=San+Francisco,+CA&limit=50&fromage=15&radius=25&start="
+    url = "https://www.indeed.com/jobs?as_and=&as_phr=&as_any=software+engineer+web+developer+intern&as_not=&as_ttl=&as_cmp=&jt=all&st=&as_src=&salary=&radius=100&l=San+Francisco+Bay+Area%2C+CA&fromage=15&limit=50&sort=&psf=advsrch&start="
 
     for i in range(min_pages):
+        page_ct += 50
         url_list = url + str(page_ct)
         jobs_per_link = scrape_links(url_list)
         all_jobs.extend(jobs_per_link)
-        page_ct += 50
 
     for job in all_jobs:
         new_job = Job_db(
@@ -79,13 +79,11 @@ def get_jobs_list(total_jobs):
             position = job['position'],
             description = job['description'],
             link = job['job_link'],
-
             html_description = job['html_description']
-
         )
         new_job.date_post = job['date_post']
         new_job.save()
 
 
 if __name__ == "__main__":
-    get_jobs_list(101)
+    get_jobs_list(100)

@@ -11,7 +11,6 @@ import json
 
 def add_item(job, key, skill_list):
 
-    print(job['html_description'])
     job_list_skill = job['description'].replace(",", " ").replace("(", " ").replace(")", " ").split()
 
     keywords = {"python", "javascript", "html", "css", "ruby", "bash",
@@ -46,7 +45,7 @@ def add_item(job, key, skill_list):
                 "djangoml", "scikit-learn", "heroku", "automation", "scrum",
                 "sql", "testing", "debugging", "terraform", "mysqlnice",
                 "unity", "sdl", "opengl", "metal", "hlsl", "glsl", "shaderlab",
-                "rendering", "postmortem", "ci", "cd", "typescript"}
+                "rendering", "postmortem", "ci", "cd", "typescript", "redis"}
 
     job_skills = {s.lower() for s in job_list_skill if s.lower() in keywords or (s.lower() + ".") in keywords}
     if "Go" in job_list_skill:
