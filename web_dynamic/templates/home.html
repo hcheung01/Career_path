@@ -4,13 +4,18 @@
 
     <!-- Main -->
       <div id="main">
-
         <!-- Post -->
           <article class="post">
             <header>
               <div class="title">
                 <h2><a href="single.html">Search Jobs</a></h2>
               </div>
+            </header>
+          <section id="intro" style="text-align: center;">
+            <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a>
+            <header>
+              <h2>Career Path</h2>
+              <p>All-in-one, personally tailored job search tool.</p>
             </header>
 
             <section>
@@ -75,7 +80,7 @@
 
       </div>
 
-
+<!--
       <section id="sidebar">
           <section id="intro" style="text-align: center;">
             <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a>
@@ -84,6 +89,6 @@
 	      <p>All-in-one, personally tailored job search tool.</p>
             </header>
           </section>
-
+-->
       </section>
 {% endblock content %}
