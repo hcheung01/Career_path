@@ -75,8 +75,8 @@
 
       </div>
 
-
-      <section id="sidebar">
+    <!-- Sidebar
+      <section id="sidebar"> -->
           <section id="intro" style="text-align: center;">
             <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a>
             <header>
@@ -85,5 +85,4 @@
             </header>
           </section>
 
-      </section>
 {% endblock content %}
