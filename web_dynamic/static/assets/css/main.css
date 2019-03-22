@@ -172,7 +172,6 @@ input, select, textarea {
 		color: inherit;
 		text-decoration: none;
 	}
-
 		a:before {
 			-moz-transition: color 0.2s ease;
 			-webkit-transition: color 0.2s ease;
@@ -3230,10 +3229,10 @@ input, select, textarea {
 		-moz-flex-direction: row-reverse;
 		-webkit-flex-direction: row-reverse;
 		-ms-flex-direction: row-reverse;
-		flex-direction: column;
 		-moz-transition: opacity 0.5s ease;
 		-webkit-transition: opacity 0.5s ease;
 		-ms-transition: opacity 0.5s ease;
+		flex-direction: column;
 		transition: opacity 0.5s ease;
 		margin: 0 auto;
 		max-width: 100%;

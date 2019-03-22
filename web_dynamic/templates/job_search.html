@@ -6,19 +6,14 @@
     <th>Position</th>
     <th>Company</th>
     <th>Location</th>
-    <th>Date Post</th>
+    <th>Posted Days Ago</th>
   </tr>
   {% for job in jobs %}
   <tr>
-    {% if user_id != None %}
-      <td><a href="/job_add/{{ user_id }}/{{ job.id }}">{{ job.position }}</td>
-    {% else %}
-      <td>{{ job.position }}</td>
-    {% endif %}
     <td><a href="/job_add/{{ job.id }}/{{ user_id }}">{{ job.position }}</td>
     <td>{{ job.company }}</td>
     <td>{{ job.location }}</td>
-    <td>{{ job.date_post }} day(s) ago</td>
+    <td>{{ job.date_post }}</td>
   </tr>
   {% endfor %}
 </table>

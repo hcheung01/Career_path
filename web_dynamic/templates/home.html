@@ -13,7 +13,6 @@
               </div>
             </header>
 
-
             <section>
             <h3>preferences</h3>
                 <div class="col-6 col-12-xsmall">
@@ -26,7 +25,7 @@
                 <div class="col-6 col-12-xsmall">
                   <input type="text" name="demo-name" id="position_box" value="" placeholder="Position" />
                 </div>
-                <ul>
+                <ul style="margin-top: 20px; padding-left: 0">
                   <button class="job_query_submit" onclick="myFunction();">submit</button>
                 </ul>
                 <script>
@@ -56,7 +55,7 @@
                     <th>Company</th>
                     <th>Position</th>
                     <th>Location</th>
-                    <th>Date Posted</th>
+                    <th>Posted Days Ago</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -65,7 +64,7 @@
                     <td><a href="/job_add/{{ job.id }}/None">{{ job.company }}</td>
                     <td>{{ job.position }}</td>
                     <td>{{ job.location }}</td>
-                    <td>{{ job.date_post }} day(s) ago</td>
+                    <td>{{ job.date_post }}</td>
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -76,18 +75,15 @@
 
       </div>
 
-    <!-- Sidebar -->
-      <section id="sidebar">
-
-        <!-- Intro -->
-          <section id="intro">
+    <!-- Sidebar
+      <section id="sidebar"> -->
+          <section id="intro" style="text-align: center;">
             <a href="#" class="logo"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></a>
             <header>
               <h2>Career Path</h2>
 	      <p>All-in-one, personally tailored job search tool.</p>
             </header>
           </section>
-
-      </section>
-
+<!--
+      </section> -->
 {% endblock content %}

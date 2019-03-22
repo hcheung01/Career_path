@@ -1,16 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h1>Company</h1>
+  <h1>Company:</h1>
   <p>{{ job_db_obj.company }}</p>
-  <h1>Title</h1>
+  <h1>Title:</h1>
   <p>{{ job_db_obj.position }}</p>
-  <h1>Location</h1>
+  <h1>Location:</h1>
   <p>{{ job_db_obj.location }}</p>
-  <h1>Link</h1>
-  <a href={{ job_db_obj.link }}>Click to apply!</a>
-  <h1>Days posted</h1>
+  <h1>Link:</h1>
+  <p><a href={{ job_db_obj.link }}>Click to apply!</a></p>
+  <h1>Days posted:</h1>
   <p>{{ job_db_obj.date_post }}</p>
-  <h1>Description</h1>
+  <h1>Description:</h1>
   {{ descrip }}
-
 {% endblock content %}
